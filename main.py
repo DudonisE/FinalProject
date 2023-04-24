@@ -23,4 +23,8 @@ print(return_names(listas, 3))
 # print(a)
 
 #labas
-lalala
+# lalala
+
+# ED
+
+#ate
