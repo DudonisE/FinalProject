@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'service.apps.ServiceConfig',
     'user.apps.UserConfig',
     'store.apps.StoreConfig',
     'django.contrib.admin',
@@ -40,7 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
+    'crispy_bootstrap4',
 ]
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,7 +62,7 @@ ROOT_URLCONF = 'eShop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'store'), os.path.join(BASE_DIR, 'user')],
+        'DIRS': [os.path.join(BASE_DIR, 'store'), os.path.join(BASE_DIR, 'user'), os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
