@@ -16,3 +16,10 @@ class BodyMeasurementsForm(forms.ModelForm):
     class Meta:
         model = BodyMeasurements
         exclude = ('last_updated',)
+
+
+# class PasswordResetForm(UserCreationForm):
+#     class Meta:
+#         model = User
+#         fields = ['email']
+#
