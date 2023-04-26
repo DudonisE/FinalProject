@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class BaseModel(models.Model):
@@ -6,6 +7,11 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class Profile(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
 
 
 class BodyMeasurements(BaseModel):
@@ -20,3 +26,5 @@ class BodyMeasurements(BaseModel):
     shoulder_to_floor = models.FloatField(verbose_name='Shoulder to floor', max_length=10)
     comment = models.TextField(verbose_name="Additional information", max_length='250', blank=True)
     last_updated = models.DateTimeField(auto_now_add=True)
+
+
