@@ -1,7 +1,10 @@
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse_lazy
 from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm
 from django.contrib.auth.decorators import login_required
 
@@ -55,14 +58,20 @@ def profile(request):
         if u_form.is_valid() and p_form.is_valid():
             u_form.save()
             p_form.save()
-            messages.success(request, f"Profilis atnaujintas")
-            return redirect('profile')
-    else:
-        u_form = UpdateUserForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
+            messages.success(request, 'Your profile was successfully updated!')
+        else:
+            messages.error(request, 'Unable to complete request')
+    u_form = UpdateUserForm(instance=request.user)
+    p_form = ProfileUpdateForm(instance=request.user.profile)
 
     context = {
         'u_form': u_form,
         'p_form': p_form,
     }
     return render(request, 'users/profile.html', context)
+
+
+class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
+    template_name = 'users/change_password.html'
+    success_message = "Successfully Changed Your Password"
+    success_url = reverse_lazy('users-profile')

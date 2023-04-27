@@ -18,20 +18,14 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
-from user import views as user_views
 from store import views as store_views
-
 
 
 urlpatterns = [
     path('', store_views.index, name='home'),
     path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
-    path("register/", user_views.register, name="register"),
-    path("login", user_views.login_request, name="login"),
-    path("logout", user_views.logout_request, name="logout"),
-    path("profile", user_views.profile, name="profile"),
-
+    path("", include('user.urls')),
 ]
 
 if settings.DEBUG:
