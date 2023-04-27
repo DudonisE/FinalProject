@@ -1,11 +1,9 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.views import View
-
-from .forms import RegisterForm, UpdateUserForm, UpdateProfileForm
+from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm
+from django.contrib.auth.decorators import login_required
 
 
 def register(response):
@@ -13,7 +11,7 @@ def register(response):
         form = RegisterForm(response.POST)
         if form.is_valid():
             form.save()
-        return render(response, "users/profile.html")
+        return redirect("/home")
     else:
         form = RegisterForm()
     return render(response, "users/register.html", {"form": form})
@@ -44,41 +42,27 @@ def logout_request(request):
     return redirect("/")
 
 
-class MyProfile(LoginRequiredMixin, View):
-    def get(self, request):
-        user_form = UpdateUserForm(instance=request.user)
-        profile_form = UpdateProfileForm(instance=request.user.profile)
+@login_required
+def profile(request):
+    return render(request, 'users/profile.html')
 
-        context = {
-            'user_form': user_form,
-            'profile_form': profile_form
-        }
 
-        return render(request, 'users/profile.html', context)
-
-    def post(self, request):
-        user_form = UpdateUserForm(
-            request.POST,
-            instance=request.user
-        )
-        profile_form = UpdateProfileForm(
-            request.POST,
-            request.FILES,
-            instance=request.user.profile
-        )
-
-        if user_form.is_valid() and profile_form.is_valid():
-            user_form.save()
-            profile_form.save()
-
-            messages.success(request, 'Your profile has been updated successfully')
-
+@login_required
+def profile(request):
+    if request.method == "POST":
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if u_form.is_valid() and p_form.is_valid():
+            u_form.save()
+            p_form.save()
+            messages.success(request, f"Profilis atnaujintas")
             return redirect('profile')
-        else:
-            context = {
-                'user_form': user_form,
-                'profile_form': profile_form
-            }
-            messages.error(request, 'Error updating you profile')
+    else:
+        u_form = UpdateUserForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-            return render(request, 'users/profile.html', context)
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+    }
+    return render(request, 'users/profile.html', context)
