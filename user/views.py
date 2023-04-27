@@ -1,9 +1,11 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import RegisterForm
-from django.contrib.auth.decorators import login_required
+from django.views import View
+
+from .forms import RegisterForm, UpdateUserForm, UpdateProfileForm
 
 
 def register(response):
@@ -11,7 +13,7 @@ def register(response):
         form = RegisterForm(response.POST)
         if form.is_valid():
             form.save()
-        return redirect("/home")
+        return render(response, "users/profile.html")
     else:
         form = RegisterForm()
     return render(response, "users/register.html", {"form": form})
@@ -42,6 +44,41 @@ def logout_request(request):
     return redirect("/")
 
 
-@login_required
-def profile(request):
-    return render(request, 'users/profile.html')
+class MyProfile(LoginRequiredMixin, View):
+    def get(self, request):
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+        context = {
+            'user_form': user_form,
+            'profile_form': profile_form
+        }
+
+        return render(request, 'users/profile.html', context)
+
+    def post(self, request):
+        user_form = UpdateUserForm(
+            request.POST,
+            instance=request.user
+        )
+        profile_form = UpdateProfileForm(
+            request.POST,
+            request.FILES,
+            instance=request.user.profile
+        )
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+
+            messages.success(request, 'Your profile has been updated successfully')
+
+            return redirect('profile')
+        else:
+            context = {
+                'user_form': user_form,
+                'profile_form': profile_form
+            }
+            messages.error(request, 'Error updating you profile')
+
+            return render(request, 'users/profile.html', context)

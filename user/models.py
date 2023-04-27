@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from PIL import Image
 
 
 class BaseModel(models.Model):
@@ -13,6 +14,17 @@ class Profile(BaseModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
 
+    def __str__(self):
+        return f"{self.user.username} Profile"
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        img = Image.open(self.avatar.path)
+        if img.height > 150 or img.width > 150:
+            output_size = (150, 150)
+            img.thumbnail(output_size)
+            img.save(self.avatar.path)
+
 
 class BodyMeasurements(BaseModel):
     bust = models.FloatField(verbose_name='Bust', max_length=10)
@@ -24,7 +36,5 @@ class BodyMeasurements(BaseModel):
     sleeve = models.FloatField(verbose_name='Sleeve', max_length=10)
     shoulder_to_waist = models.FloatField(verbose_name='Shoulder to waist', max_length=10)
     shoulder_to_floor = models.FloatField(verbose_name='Shoulder to floor', max_length=10)
-    comment = models.TextField(verbose_name="Additional information", max_length='250', blank=True)
+    comment = models.TextField(verbose_name="Additional information", max_length=250, blank=True)
     last_updated = models.DateTimeField(auto_now_add=True)
-
-
