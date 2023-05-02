@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="requirements update" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="7cb38701-da5f-4531-b185-de3bdb4fe9b4" />
+        <option name="url" value="https://github.com/DudonisE/FinalProject.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2Op18H9I29iZdrjX13f0Iweyssj" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="" />
+      <created>1682242547100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1682242547100</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Test">
+      <created>1682354295150</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1682354295150</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Test">
+      <created>1682354856906</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1682354856906</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Test">
+      <created>1682354908574</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1682354908574</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Test">
+      <created>1682354966048</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1682354966048</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Test">
+      <created>1682355048026</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682355048026</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Test">
+      <created>1682355157355</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1682355157355</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Test">
+      <created>1682355724195</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1682355724195</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Komentaras1">
+      <created>1682355752165</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1682355752165</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Main deleted">
+      <created>1682356290610</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1682356290610</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Updated user models and created form&#10;Updated requirements">
+      <created>1682362848615</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1682362848615</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Updated user models and created form&#10;Updated requirements">
+      <created>1682436227929</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1682436227929</updated>
+    </task>
+    <task id="LOCAL-00012" summary="login/register/pass_reset">
+      <created>1682441618955</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1682441618955</updated>
+    </task>
+    <task id="LOCAL-00013" summary="login update">
+      <created>1682449178758</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1682449178758</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Updated profile.&#10;Fixed img size.&#10;Added titles.&#10;Fixed routes names.&#10;Some HTML changes.">
+      <created>1682542486242</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1682542486242</updated>
+    </task>
+    <task id="LOCAL-00015" summary="requirements update">
+      <created>1682542582382</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1682542582382</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Test" />
+    <MESSAGE value="Komentaras1" />
+    <MESSAGE value="Main deleted" />
+    <MESSAGE value="Updated user models and created form&#10;Updated requirements" />
+    <MESSAGE value="login/register/pass_reset" />
+    <MESSAGE value="login update" />
+    <MESSAGE value="Updated profile.&#10;Fixed img size.&#10;Added titles.&#10;Fixed routes names.&#10;Some HTML changes." />
+    <MESSAGE value="requirements update" />
+    <option name="LAST_COMMIT_MESSAGE" value="requirements update" />
+  </component>
+</project>
