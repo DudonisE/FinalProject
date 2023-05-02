@@ -1,0 +1,25 @@
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Subject: Password reset on 127.0.0.1:8000
+From: webmaster@localhost
+To: kriste@gmail.com
+Date: Tue, 25 Apr 2023 18:02:16 -0000
+Message-ID: <168244573648.70937.304188948721980886@Kristinas-Air>
+
+
+You're receiving this email because you requested a password reset for your user account at 127.0.0.1:8000.
+
+Please go to the following page and choose a new password:
+
+http://127.0.0.1:8000/password-reset-confirm/Mg/bn84rs-c9b872375c3bb913f3ee40043dfc660b/
+
+Your username, in case you’ve forgotten: kristucia
+
+Thanks for using our site!
+
+The 127.0.0.1:8000 team
+
+
+
+-------------------------------------------------------------------------------

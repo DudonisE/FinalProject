@@ -21,8 +21,8 @@ class Profile(BaseModel):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.avatar.path)
-        if img.height > 300 or img.width > 300:
-            output_size = (300, 300)
+        if img.height > 100 or img.width > 100:
+            output_size = (50, 50)
             img.thumbnail(output_size)
             img.save(self.avatar.path)
 
@@ -37,5 +37,7 @@ class BodyMeasurements(BaseModel):
     sleeve = models.FloatField(verbose_name='Sleeve', max_length=10)
     shoulder_to_waist = models.FloatField(verbose_name='Shoulder to waist', max_length=10)
     shoulder_to_floor = models.FloatField(verbose_name='Shoulder to floor', max_length=10)
-    comment = models.TextField(verbose_name="Additional information", max_length=250, blank=True)
+    comment = models.TextField(verbose_name="Additional information", max_length='250', blank=True)
     last_updated = models.DateTimeField(auto_now_add=True)
+
+
