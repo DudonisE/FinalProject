@@ -5,19 +5,21 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
-from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm
+from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm
 from django.contrib.auth.decorators import login_required
 
 
-def register(response):
-    if response.method == "POST":
-        form = RegisterForm(response.POST)
+def register(request):
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect("/home")
+            username = form.cleaned_data.get('username')
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect("/")
     else:
         form = RegisterForm()
-    return render(response, "users/register.html", {"form": form})
+    return render(request, "users/register.html", {"form": form})
 
 
 def login_request(request):
@@ -55,18 +57,22 @@ def profile(request):
     if request.method == "POST":
         u_form = UpdateUserForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        if u_form.is_valid() and p_form.is_valid():
+        m_form = BodyMeasurementsForm(request.POST, instance=request.user)
+        if u_form.is_valid() and p_form.is_valid() and m_form.is_valid():
             u_form.save()
             p_form.save()
+            m_form.save()
             messages.success(request, 'Your profile was successfully updated!')
-        else:
-            messages.error(request, 'Unable to complete request')
-    u_form = UpdateUserForm(instance=request.user)
-    p_form = ProfileUpdateForm(instance=request.user.profile)
+            return redirect(to='users-profile')
+    else:
+        u_form = UpdateUserForm(instance=request.user)
+        p_form = ProfileUpdateForm(instance=request.user.profile)
+        m_form = BodyMeasurementsForm(instance=request.user)
 
     context = {
         'u_form': u_form,
         'p_form': p_form,
+        'm_form': m_form,
     }
     return render(request, 'users/profile.html', context)
 
