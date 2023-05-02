@@ -15,7 +15,7 @@ class RegisterForm(UserCreationForm):
 class BodyMeasurementsForm(forms.ModelForm):
     class Meta:
         model = BodyMeasurements
-        exclude = ('last_updated',)
+        exclude = ('last_updated', )
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -30,7 +30,9 @@ class UpdateUserForm(forms.ModelForm):
 
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'email']
+        fields = ['username', 'first_name', 'last_name', 'email', ]
+
+
 
 # class PasswordResetForm(UserCreationForm):
 #     class Meta:

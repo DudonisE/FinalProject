@@ -4,7 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="requirements update" />
+    <list default="true" id="b2f38d8f-28eb-4831-bbbf-bc7f2b903ab8" name="Changes" comment="profile update">
+      <change afterPath="$PROJECT_DIR$/media/bodymeasurements.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-04-25_19_56_[Changes]/db.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-04-25_19_56_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_2023-04-25_19_56__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/media/default.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/media/default.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/service/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0002_profile.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0003_alter_bodymeasurements_comment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/0004_alter_bodymeasurements_comment.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/users/change_password.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/users/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/users/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/templates/users/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/user/templates/users/profile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/user/views.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +35,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -25,176 +47,103 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="7cb38701-da5f-4531-b185-de3bdb4fe9b4" />
-        <option name="url" value="https://github.com/DudonisE/FinalProject.git" />
-      </UrlAndAccount>
-    </option>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/user/models.py" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2Op18H9I29iZdrjX13f0Iweyssj" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
+  <component name="ProjectId" id="2OskcCuUK47LdDlsdIkVfuI7GfY" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;
+    &quot;last_opened_file_path&quot;: &quot;/Users/kristinatolockaite/FinalProject/templates/registration&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/templates/registration" />
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/templates" />
+      <recent name="$PROJECT_DIR$/user/templates/users" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/media" />
+      <recent name="$PROJECT_DIR$/media/profile_images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="" />
-      <created>1682242547100</created>
+      <changelist id="b2f38d8f-28eb-4831-bbbf-bc7f2b903ab8" name="Changes" comment="" />
+      <created>1682356754278</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1682242547100</updated>
+      <updated>1682356754278</updated>
     </task>
-    <task id="LOCAL-00001" summary="Test">
-      <created>1682354295150</created>
+    <task id="LOCAL-00001" summary="update">
+      <created>1682360899905</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1682354295150</updated>
+      <updated>1682360899905</updated>
     </task>
-    <task id="LOCAL-00002" summary="Test">
-      <created>1682354856906</created>
+    <task id="LOCAL-00002" summary="login update">
+      <created>1682448720827</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1682354856906</updated>
+      <updated>1682448720827</updated>
     </task>
-    <task id="LOCAL-00003" summary="Test">
-      <created>1682354908574</created>
+    <task id="LOCAL-00003" summary="profile update">
+      <created>1682524492937</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1682354908574</updated>
+      <updated>1682524492937</updated>
     </task>
-    <task id="LOCAL-00004" summary="Test">
-      <created>1682354966048</created>
+    <task id="LOCAL-00004" summary="profile update">
+      <created>1682575196015</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1682354966048</updated>
+      <updated>1682575196015</updated>
     </task>
-    <task id="LOCAL-00005" summary="Test">
-      <created>1682355048026</created>
+    <task id="LOCAL-00005" summary="profile update">
+      <created>1682577023391</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1682355048026</updated>
+      <updated>1682577023391</updated>
     </task>
-    <task id="LOCAL-00006" summary="Test">
-      <created>1682355157355</created>
+    <task id="LOCAL-00006" summary="profile update">
+      <created>1682593823627</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1682355157355</updated>
+      <updated>1682593823627</updated>
     </task>
-    <task id="LOCAL-00007" summary="Test">
-      <created>1682355724195</created>
+    <task id="LOCAL-00007" summary="profile update">
+      <created>1682619956870</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1682355724195</updated>
+      <updated>1682619956870</updated>
     </task>
-    <task id="LOCAL-00008" summary="Komentaras1">
-      <created>1682355752165</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1682355752165</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Main deleted">
-      <created>1682356290610</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1682356290610</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Updated user models and created form&#10;Updated requirements">
-      <created>1682362848615</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1682362848615</updated>
-    </task>
-    <task id="LOCAL-00011" summary="Updated user models and created form&#10;Updated requirements">
-      <created>1682436227929</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1682436227929</updated>
-    </task>
-    <task id="LOCAL-00012" summary="login/register/pass_reset">
-      <created>1682441618955</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1682441618955</updated>
-    </task>
-    <task id="LOCAL-00013" summary="login update">
-      <created>1682449178758</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1682449178758</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Updated profile.&#10;Fixed img size.&#10;Added titles.&#10;Fixed routes names.&#10;Some HTML changes.">
-      <created>1682542486242</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1682542486242</updated>
-    </task>
-    <task id="LOCAL-00015" summary="requirements update">
-      <created>1682542582382</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1682542582382</updated>
-    </task>
-    <option name="localTasksCounter" value="16" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Test" />
-    <MESSAGE value="Komentaras1" />
-    <MESSAGE value="Main deleted" />
-    <MESSAGE value="Updated user models and created form&#10;Updated requirements" />
-    <MESSAGE value="login/register/pass_reset" />
+    <MESSAGE value="update" />
     <MESSAGE value="login update" />
-    <MESSAGE value="Updated profile.&#10;Fixed img size.&#10;Added titles.&#10;Fixed routes names.&#10;Some HTML changes." />
-    <MESSAGE value="requirements update" />
-    <option name="LAST_COMMIT_MESSAGE" value="requirements update" />
+    <MESSAGE value="profile update" />
+    <option name="LAST_COMMIT_MESSAGE" value="profile update" />
   </component>
 </project>

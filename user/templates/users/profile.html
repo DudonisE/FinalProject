@@ -28,6 +28,9 @@
 						<div class="text-right">
 							<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#changepassModal">Change Password</button>
 						</div>
+                        <div class="text-right">
+							<button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#measurementsModal">Add Your Measurements</button>
+						</div>
 			        </div>
 		    	</div>
 		  	</div>
@@ -38,14 +41,15 @@
 		    <div class="modal-content">
 		      	<div class="modal-header">
 			        <h5 class="modal-title">Edit Profile</h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></button>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		        </div>
 		        <div class="modal-body">
 			        <form method="post">
 			          	{{ u_form|crispy }}
+						{{ p_form|crispy }}
 						{% csrf_token %}
 		      	<div class="modal-footer">
-		        		<button type="button" class="btn btn-primary">Save changes</button>
+		        		<button type="submit" class="btn btn-primary">Save changes</button>
 		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 		        </div>
 					</form>
@@ -113,7 +117,7 @@
                                     <div class="form-row">
                                         <div class="col-md-10 offset-md-1">
                                             <div class="modal-footer">
-											<button type="button" class="btn btn-primary">Save changes</button>
+											<button type="submit" class="btn btn-primary">Save changes</button>
 		        							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 		        						</div>
                                         </div>
@@ -123,6 +127,26 @@
                         </div>
                 </div>
             </div>
-        </div>
-    </div>
+<div class="modal fade" tabindex="-1" id="measurementsModal" role="dialog">
+	  	<div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      	<div class="modal-header">
+			        <h5 class="modal-title">Add Your Measurements</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		        </div>
+		        <div class="modal-body">
+			        <form method="post">
+			          	{{ m_form|crispy }}
+						{% csrf_token %}
+		      	<div class="modal-footer">
+					<img src="bodymeasurements.jpg" style="width:500px;height:600px;">
+		        		<button type="submit" class="btn btn-primary">Save changes</button>
+		        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		        </div>
+					</form>
+				</div>
+		    </div>
+	  	</div>
+	</div>
+
 {% endblock content %}

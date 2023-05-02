@@ -28,6 +28,7 @@ class Profile(BaseModel):
 
 
 class BodyMeasurements(BaseModel):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     bust = models.FloatField(verbose_name='Bust', max_length=10)
     waist = models.FloatField(verbose_name='Waist', max_length=10)
     hips = models.FloatField(verbose_name='Hips', max_length=10)
@@ -37,7 +38,8 @@ class BodyMeasurements(BaseModel):
     sleeve = models.FloatField(verbose_name='Sleeve', max_length=10)
     shoulder_to_waist = models.FloatField(verbose_name='Shoulder to waist', max_length=10)
     shoulder_to_floor = models.FloatField(verbose_name='Shoulder to floor', max_length=10)
-    comment = models.TextField(verbose_name="Additional information", max_length='250', blank=True)
+    comment = models.TextField(verbose_name="Additional information", max_length=250, blank=True)
+    measure_model = models.ImageField(default='bodymeasurements.jpg')
     last_updated = models.DateTimeField(auto_now_add=True)
 
 
