@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="profile update">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-04-27_07_16_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-04-27_07_16__Changes_.xml" beforeDir="false" />
+    <list default="true" id="b2f38d8f-28eb-4831-bbbf-bc7f2b903ab8" name="Changes" comment="profile update">
+      <change afterPath="$PROJECT_DIR$/user/migrations/0001_initial.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/migrations/0002_alter_bodymeasurements_user.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/migrations/0003_bodymeasurements_avatar.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/migrations/0004_rename_avatar_bodymeasurements_measure_model.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/user/migrations/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/store/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +28,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ED" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -38,9 +40,6 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2OskcCuUK47LdDlsdIkVfuI7GfY" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -51,7 +50,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/kristinatolockaite/FinalProject/templates/registration&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -69,7 +68,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="80edc47d-5cb2-415d-9fb6-4bd1309d9f83" name="Changes" comment="gitignore" />
+      <changelist id="b2f38d8f-28eb-4831-bbbf-bc7f2b903ab8" name="Changes" comment="" />
       <created>1682356754278</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -124,38 +123,19 @@
       <option name="project" value="LOCAL" />
       <updated>1682619956870</updated>
     </task>
-    <task id="LOCAL-00008" summary="requirements update1">
-      <created>1683128130426</created>
+    <task id="LOCAL-00008" summary="profile update">
+      <created>1683055949090</created>
       <option name="number" value="00008" />
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
-      <updated>1683128130426</updated>
+      <updated>1683055949090</updated>
     </task>
-    <task id="LOCAL-00009" summary="profile update">
-      <created>1683130855182</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1683130855182</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="9" />
     <servers />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update" />
     <MESSAGE value="login update" />
-    <MESSAGE value="requirements update1" />
     <MESSAGE value="profile update" />
     <option name="LAST_COMMIT_MESSAGE" value="profile update" />
   </component>
