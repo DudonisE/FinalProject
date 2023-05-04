@@ -34,7 +34,7 @@ class Category(BaseModel):
     description = models.CharField(max_length=500)
 
 
-class Products(BaseModel):
+class Product(BaseModel):
     name = models.CharField(max_length=100, blank=False)
     color = models.CharField(max_length=100, blank=False)
     description = models.CharField(max_length=500)
