@@ -8,7 +8,7 @@ class BaseModel(models.Model):
         abstract = True
 
 
-GENDER_CHOICES = [
+CHOICES = [
     ('Man', 'Man'),
     ('Woman', 'Woman'),
     ('Kids', 'Kids'),
@@ -25,19 +25,13 @@ SIZE_CHOICES = [
 
 
 class Size(models.Model):
-    size = models.CharField(max_length=200, choices=SIZE_CHOICES)
-    description = models.TextField(max_length=200, blank=True)
-
-    def __str__(self):
-        return self.size
+    name = models.CharField(max_length=200)
+    description = models.TextField(max_length=200)
 
 
 class Category(BaseModel):
-    gender = models.CharField(max_length=50, choices=GENDER_CHOICES, default='notSelected')
-    category_name = models.CharField(max_length=100)
-
-    def __str__(self):
-        return f'{self.gender} {self.category_name}'
+    category_name = models.CharField(max_length=50, choices=CHOICES)
+    description = models.CharField(max_length=500)
 
 
 class Product(BaseModel):
@@ -53,6 +47,3 @@ class Product(BaseModel):
     image_1 = models.ImageField(upload_to="product_images", default=None, blank=False)
     image_2 = models.ImageField(upload_to="product_images", default=None)
     image_3 = models.ImageField(upload_to="product_images", default=None)
-
-    def __str__(self):
-        return self.name
