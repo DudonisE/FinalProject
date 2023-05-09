@@ -5,8 +5,12 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
+from rest_framework import generics
+from django.contrib.auth.models import User
 from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm
 from django.contrib.auth.decorators import login_required
+
+from .serializers import UserSerializer
 
 
 def register(request):
@@ -81,3 +85,13 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     template_name = 'users/change_password.html'
     success_message = "Successfully Changed Your Password"
     success_url = reverse_lazy('users-profile')
+
+
+class UserList(generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserDetail(generics.RetrieveAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

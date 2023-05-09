@@ -17,14 +17,22 @@ def irasu_grazintojas(id):
     return duomenys
 #
 def duomenu_rasytojas(duomenys):
-    data = json.dumps(duomenys)
-    padavimas = requests.post(f'{URL}', data=data)
+    # data = json.dumps(duomenys)
+    padavimas = requests.post(f'{URL}', data=duomenys)
     print(padavimas.status_code)
 
-#
-#
-ikelt = {'name': 'Shirt1', 'color': 'Blue1', 'description': 'Beutiful1', 'price': '600.00'}
+
+def duomenu_redagavimas(duomenys, id):
+    uzklausa = requests.put(f'{URL}{id}/', data=duomenys)
+    print(uzklausa)
+
+
+
+
+
+# ikelt = {'name': 'Shirt1', 'color': 'blue1', 'description': 'Beutiful1', 'price': '600.00'}
+ikelt = {'color': 'red1'}
 # duomenys = {'name': 'Boruzes skraido'}
 # print(irasu_grazintojas(1))
 # duomenu_rasytojas(ikelt)
-
+duomenu_redagavimas(ikelt, 2)
