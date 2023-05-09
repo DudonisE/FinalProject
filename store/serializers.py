@@ -15,4 +15,6 @@ class CategorySerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ['name', 'color', 'description', 'price',]
+        owner = serializers.ReadOnlyField(source='owner.username')
+        fields = ['owner','name', 'color', 'description', 'price',]
+

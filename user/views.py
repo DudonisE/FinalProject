@@ -6,10 +6,9 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from rest_framework import generics
-
+from django.contrib.auth.models import User
 from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 
 from .serializers import UserSerializer
 
