@@ -15,7 +15,18 @@ class RegisterForm(UserCreationForm):
 class BodyMeasurementsForm(forms.ModelForm):
     class Meta:
         model = BodyMeasurements
-        exclude = ('last_updated', )
+        labels = {
+            'bust': 'Bust (A)',
+            'waist': 'Waist (B)',
+            'hips': 'Hips (C)',
+            'neck': 'Neck (D)',
+            'chest': 'Chest (E)',
+            'shoulder': 'Shoulder (F)',
+            'sleeve': 'Sleeve (G)',
+            'shoulder_to_waist': 'Shoulder to waist (H)',
+            'shoulder_to_floor': 'Shoulder to floor (I)',
+        }
+        exclude = ('user', 'last_updated', 'measure_model', )
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -31,8 +42,6 @@ class UpdateUserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', ]
-
-
 
 # class PasswordResetForm(UserCreationForm):
 #     class Meta:

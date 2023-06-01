@@ -16,7 +16,7 @@ class Profile(BaseModel):
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images')
 
     def __str__(self):
-        return f"{self.user.username} profilis"
+        return f"{self.user.username} profile"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -39,7 +39,5 @@ class BodyMeasurements(BaseModel):
     shoulder_to_waist = models.FloatField(verbose_name='Shoulder to waist', max_length=10)
     shoulder_to_floor = models.FloatField(verbose_name='Shoulder to floor', max_length=10)
     comment = models.TextField(verbose_name="Additional information", max_length=250, blank=True)
-    measure_model = models.ImageField(default='bodymeasurements.jpg')
+    measure_model = models.ImageField(default='body_measurements.jpg', blank=True)
     last_updated = models.DateTimeField(auto_now_add=True)
-
-
