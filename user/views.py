@@ -53,32 +53,47 @@ def logout_request(request):
 
 @login_required
 def profile(request):
-    return render(request, 'users/profile.html')
+    if request.user.is_authenticated():
+        return render(request, 'users/profile.html')
 
 
 @login_required
 def profile(request):
+    user = request.user
+    if request.method == "POST":
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
+        if p_form.is_valid() :
+            p_form.save()
+    else:
+        p_form = ProfileUpdateForm(instance=request.user)
     if request.method == "POST":
         u_form = UpdateUserForm(request.POST, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        m_form = BodyMeasurementsForm(request.POST, instance=request.user)
-        if u_form.is_valid() and p_form.is_valid() and m_form.is_valid():
+        if u_form.is_valid():
             u_form.save()
-            p_form.save()
-            m_form.save()
+    else:
+        u_form = UpdateUserForm(instance=request.user)
+    if request.method == "POST":
+        m_form = BodyMeasurementsForm(request.POST)
+        if m_form.is_valid():
+            measurements = m_form.save(commit=False)
+            if measurements.user is None:
+                measurements.user = request.user
+            measurements.save()
             messages.success(request, 'Your profile was successfully updated!')
             return redirect(to='users-profile')
     else:
-        u_form = UpdateUserForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-        m_form = BodyMeasurementsForm(instance=request.user)
+        m_form = BodyMeasurementsForm()
 
-    context = {
+    # context = {
+    #     'u_form': u_form,
+    #     'p_form': p_form,
+    #     'm_form': m_form,
+    # }
+    return render(request, 'users/profile.html', {
         'u_form': u_form,
         'p_form': p_form,
         'm_form': m_form,
-    }
-    return render(request, 'users/profile.html', context)
+    })
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):

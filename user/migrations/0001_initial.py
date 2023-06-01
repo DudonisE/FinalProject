@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
                 ),
                 (
                     "measure_model",
-                    models.ImageField(default="bodymeasurements.jpg", upload_to=""),
+                    models.ImageField(default="body_measurements.jpg", upload_to=""),
                 ),
                 ("last_updated", models.DateTimeField(auto_now_add=True)),
                 (
