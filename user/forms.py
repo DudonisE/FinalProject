@@ -26,7 +26,9 @@ class BodyMeasurementsForm(forms.ModelForm):
             'shoulder_to_waist': 'Shoulder to waist (H)',
             'shoulder_to_floor': 'Shoulder to floor (I)',
         }
-        exclude = ('user', 'last_updated', 'measure_model', )
+        # fields = '__all__'
+        exclude = ('user','measure_model',)
+        # exclude = ('user', 'last_updated', 'measure_model', )
 
 
 class ProfileUpdateForm(forms.ModelForm):
