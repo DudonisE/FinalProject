@@ -26,7 +26,7 @@ SIZE_CHOICES = [
 
 class Size(models.Model):
     size = models.CharField(max_length=200, choices=SIZE_CHOICES)
-    description = models.TextField(max_length=200, blank=True)
+    description = models.CharField(max_length=200, blank=True)
 
     def __str__(self):
         return self.size
@@ -44,7 +44,7 @@ class Product(BaseModel):
     owner = models.ForeignKey('auth.User', related_name='product', on_delete=models.CASCADE)
     name = models.CharField(max_length=100, blank=False)
     color = models.CharField(max_length=100, blank=False)
-    description = models.CharField(max_length=500)
+    description = models.TextField(verbose_name="Additional information", max_length=500)
     category_name = models.ManyToManyField(Category)
     size = models.ManyToManyField(Size)
     price = models.DecimalField(max_digits=5, decimal_places=2, blank=False)

@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm
 from django.contrib.auth.decorators import login_required
 
+from .models import BodyMeasurements
 from .serializers import UserSerializer
 
 
@@ -51,49 +52,81 @@ def logout_request(request):
     return redirect("/")
 
 
+'''
 @login_required
-def profile(request):
-    if request.user.is_authenticated():
-        return render(request, 'users/profile.html')
-
-
-@login_required
-def profile(request):
-    user = request.user
+def update_profile(request):
     if request.method == "POST":
-        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile)
-        if p_form.is_valid() :
-            p_form.save()
-    else:
-        p_form = ProfileUpdateForm(instance=request.user)
-    if request.method == "POST":
-        u_form = UpdateUserForm(request.POST, instance=request.user)
+        u_form = UpdateUserForm(request.POST or None, instance=request.user)
+        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
         if u_form.is_valid():
             u_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return render(request, 'users/profile.html')
+        elif p_form.is_valid():
+            p_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return render(request, 'users/profile.html')
     else:
         u_form = UpdateUserForm(instance=request.user)
-    if request.method == "POST":
-        m_form = BodyMeasurementsForm(request.POST)
-        if m_form.is_valid():
-            measurements = m_form.save(commit=False)
-            if measurements.user is None:
-                measurements.user = request.user
-            measurements.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return redirect(to='users-profile')
-    else:
-        m_form = BodyMeasurementsForm()
+        p_form = ProfileUpdateForm(instance=request.user.profile)
 
-    # context = {
-    #     'u_form': u_form,
-    #     'p_form': p_form,
-    #     'm_form': m_form,
-    # }
     return render(request, 'users/profile.html', {
         'u_form': u_form,
         'p_form': p_form,
-        'm_form': m_form,
     })
+
+
+@login_required
+def add_body_measurements(request):
+    if request.method == "POST":
+        m_form = BodyMeasurementsForm(request.POST, instance=request.user.profile)
+        if m_form.is_valid():
+            m_form.save()
+            messages.success(request, 'Your profile was successfully updated!')
+            return render(request, 'users/profile.html')
+    else:
+        m_form = BodyMeasurementsForm(instance=request.user)
+    return render(request, 'users/profile.html', {'m_form': m_form})
+'''
+
+
+@login_required
+def profile(request):
+
+    user = request.user.id
+    bm = BodyMeasurements.objects.get(user_id=user)
+
+    if request.method == "POST":
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user)
+        u_form = UpdateUserForm(request.POST, instance=request.user)
+        m_form = BodyMeasurementsForm(request.POST, request.FILES, instance=bm)
+
+        if p_form.is_valid():
+            p_form.save()
+        if u_form.is_valid():
+            u_form.save()
+        if m_form.is_valid():
+            m_form.save()
+
+        messages.success(request, 'Your profile was successfully updated!')
+    else:
+        try:
+            p_form = ProfileUpdateForm(instance=request.user)
+            u_form = UpdateUserForm(instance=request.user)
+            measures = BodyMeasurements.objects.get(user_id=user)
+            m_form = BodyMeasurementsForm(instance=measures)
+        except BodyMeasurements.DoesNotExist:
+            m_form = BodyMeasurementsForm()
+            p_form = ProfileUpdateForm(instance=request.user)
+            u_form = UpdateUserForm(instance=request.user)
+
+    context = {
+        'u_form': u_form,
+        'p_form': p_form,
+        'm_form': m_form,
+    }
+
+    return render(request, 'users/profile.html', context=context)
 
 
 class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
