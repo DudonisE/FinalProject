@@ -62,11 +62,9 @@ class Product(BaseModel):
 
 
 class CartItem(models.Model):
-    cart_id = models.CharField(max_length=50)
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    price = models.DecimalField(max_digits=7, decimal_places=2)
-    quantity = models.IntegerField(default=1, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
+    quantity = models.IntegerField(default=1)
+    date_added = models.DateTimeField(auto_now_add=True, null=True)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
 
     def __str__(self):
@@ -77,7 +75,7 @@ class CartItem(models.Model):
         self.save()
 
     def total_cost(self):
-        return self.quantity * self.price
+        return self.quantity * Product.price
 
 
 class Order(models.Model):

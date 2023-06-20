@@ -3,10 +3,10 @@ from django.shortcuts import get_object_or_404, get_list_or_404
 
 
 def _cart_id(request):
-    if 'cart_id' not in request.session:
-        request.session['cart_id'] = _generate_cart_id()
+    if 'id' not in request.session:
+        request.session['id'] = _generate_cart_id()
 
-    return request.session['cart_id']
+    return request.session['id']
 
 
 def _generate_cart_id():
@@ -15,14 +15,13 @@ def _generate_cart_id():
 
 
 def get_all_cart_items(request):
-    return CartItem.objects.filter(cart_id = _cart_id(request))
+    return CartItem.objects.filter(id=id(request))
 
 
 def add_item_to_cart(request):
-    # cart_id = _cart_id(request)
-
     product_id = request.form_data['product_id']
     quantity = request.form_data['quantity']
+    user_id = request.user.id
 
     p = get_object_or_404(Product, id=product_id)
 
@@ -35,18 +34,14 @@ def add_item_to_cart(request):
     for cart_item in cart_items:
         if cart_item.product_id == product_id:
             cart_item.update_quantity(quantity)
-            # cart_item.save()
             item_in_cart = True
 
     if not item_in_cart:
         item = CartItem(
-            cart_id = _cart_id(request),
-            price = price,
-            quantity = quantity,
-            product_id = product_id,
+            quantity=quantity,
+            product_id=product_id,
+            user_id=user_id
         )
-
-        # item.cart_id = cart_id
         item.save()
 
 
