@@ -78,6 +78,7 @@ class CartItem(models.Model):
         return self.quantity * self.product.price
 
 
+
 class Order(models.Model):
     name = models.CharField(max_length=191)
     email = models.EmailField()

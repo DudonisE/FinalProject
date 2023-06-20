@@ -3,11 +3,9 @@
 
 <div class="container">
         <div class="row">
-
             <p><a href="{% url 'women-products-view' %}">All Products </a> &gt;
                 {{ product.name }}
             </p>
-
                 <h2>{{ product.name }}</h2>
             <a>
         <img src="{{ product.image_1.url }}" hspace='40' vspace='40' width='250px' height='250px' alt=""/>
@@ -19,7 +17,6 @@
                     {{ form }}
                     <input type="submit" value="Add to cart" class="btn btn-primary" >
                 </form>
-
         </div>
 
     </div>
