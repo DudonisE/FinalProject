@@ -1,5 +1,7 @@
 from .models import CartItem, Product
 from django.shortcuts import get_object_or_404, get_list_or_404
+import string
+import random
 
 
 def _cart_id(request):
@@ -10,7 +12,6 @@ def _cart_id(request):
 
 
 def _generate_cart_id():
-    import string, random
     return ''.join([random.choice(string.ascii_letters + string.digits) for _ in range(50)])
 
 
