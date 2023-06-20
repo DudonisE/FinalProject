@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+     <div class="row">
+      {% for product in men_items %}
+        <div class="col-lg-4">
+            <a href="{{product.id}}">
+        <img src="{{ product.image_1.url }}" hspace='40' vspace='40' width='250px' height='250px' alt=""/>
+            </a>
+            <div class="box-element product">
+                <h6><strong>{{ product.name }}</strong></h6>
+                <hr>
+                <button data-product= {{ product.id }} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to Cart</button>
+                <a class="btn btn-outline-primary" href="#">View</a>
+		        <h4 style="display: inline-block; float: right"><strong>${{ product.price|floatformat:2 }}</strong></h4>
+            </div>
+        </div>
+      {% endfor %}
+    </div>
+{% endblock content %}

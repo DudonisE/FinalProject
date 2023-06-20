@@ -7,6 +7,7 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
   <a class="navbar-brand" href="/">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -14,12 +15,14 @@
   <div class="collapse navbar-collapse" id="navbarText">
     <ul class="navbar-nav mr-auto">
       {% if user.is_authenticated %}
-      <li class="nav-item">
-        <a class="nav-link" href="/logout">Logout</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="profile">Welcome, {{user.username}}</a>
-      </li>
+      <div class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="profile" role="button" aria-expanded="false">Welcome, {{user.username}}</a>
+  <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+    <li><a class="dropdown-item" href="{% url 'show_cart' %}">My cart</a></li>
+    <li><a  class="dropdown-item" href="{% url 'users-profile'%}">My profile</a></li>
+    <li><a class=dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+  </ul>
+      </div>
       {% else %}
       <li class="nav-item">
         <a class="nav-link" href="/login">Login</a>
@@ -28,8 +31,28 @@
         <a class="nav-link" href="/register">Register</a>
       </li>
       {% endif %}
-    </ul>
-  </div>
+        <div class="nav-item dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Women</a>
+  <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+    <li><a class="dropdown-item" href="{% url 'women-products-view' %}">All</a></li>
+    {% for category in women_category %}
+    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+  {% endfor %}
+  </ul>
+            </div>
+      <div class="dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Men</a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="/men_products">All</a></li>
+    {% for category in men_category %}
+    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+        <form class="d-flex" action="{% url 'search-view' %}" method="GET" value="{{request.GET.name}}">
+                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+        </form>
 </nav>
 
     {% include 'messages.html' %}
