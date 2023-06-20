@@ -53,7 +53,6 @@ def men_products(request):
 
 def one_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
-
     if request.method == 'POST':
         form = CartForm(request, request.POST)
         if form.is_valid():
