@@ -31,8 +31,8 @@ def duomenu_redagavimas(duomenys, id):
 
 
 # ikelt = {'name': 'Shirt1', 'color': 'blue1', 'description': 'Beutiful1', 'price': '600.00'}
-ikelt = {'color': 'red1'}
+# ikelt = {'color': 'red1'}
 # duomenys = {'name': 'Boruzes skraido'}
 # print(irasu_grazintojas(1))
 # duomenu_rasytojas(ikelt)
-duomenu_redagavimas(ikelt, 2)
+# duomenu_redagavimas(ikelt, 2)
