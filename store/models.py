@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from user.models import Profile
 
 
 class BaseModel(models.Model):
@@ -68,7 +67,7 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
 
     def __str__(self):
-        return "{}:{}".format(self.product.name, self.id)
+        return "{}:{}".format(self.product.name, self.pk)
 
     def update_quantity(self, quantity):
         self.quantity = self.quantity + quantity
@@ -76,7 +75,6 @@ class CartItem(models.Model):
 
     def total_cost(self):
         return self.quantity * self.product.price
-
 
 
 class Order(models.Model):
@@ -88,7 +86,7 @@ class Order(models.Model):
     paid = models.BooleanField(default=False)
 
     def __str__(self):
-        return "{}:{}".format(self.id, self.email)
+        return "{}:{}".format(self.pk, self.email)
 
     # def total_cost(self):
     #     return sum([ li.cost() for li in self.lineitem_set.all() ] )
