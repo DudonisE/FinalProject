@@ -52,44 +52,6 @@ def logout_request(request):
     return redirect("/")
 
 
-'''
-@login_required
-def update_profile(request):
-    if request.method == "POST":
-        u_form = UpdateUserForm(request.POST or None, instance=request.user)
-        p_form = ProfileUpdateForm(request.POST or None, request.FILES, instance=request.user.profile)
-        if u_form.is_valid():
-            u_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return render(request, 'users/profile.html')
-        elif p_form.is_valid():
-            p_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return render(request, 'users/profile.html')
-    else:
-        u_form = UpdateUserForm(instance=request.user)
-        p_form = ProfileUpdateForm(instance=request.user.profile)
-
-    return render(request, 'users/profile.html', {
-        'u_form': u_form,
-        'p_form': p_form,
-    })
-
-
-@login_required
-def add_body_measurements(request):
-    if request.method == "POST":
-        m_form = BodyMeasurementsForm(request.POST, instance=request.user.profile)
-        if m_form.is_valid():
-            m_form.save()
-            messages.success(request, 'Your profile was successfully updated!')
-            return render(request, 'users/profile.html')
-    else:
-        m_form = BodyMeasurementsForm(instance=request.user)
-    return render(request, 'users/profile.html', {'m_form': m_form})
-'''
-
-
 @login_required
 def profile(request):
 
