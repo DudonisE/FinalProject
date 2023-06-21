@@ -1,6 +1,5 @@
-from . import cart
+from store import cart
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import DetailView
 from rest_framework import generics
 from rest_framework import permissions
 from rest_framework.decorators import api_view
@@ -31,6 +30,7 @@ def women_products(request):
     context = {
         'women_items': Product.objects.filter(category_name__gender='Woman'),
         'women_category': Category.objects.filter(gender='Woman'),
+
     }
     return render(request, "store/women_products.html", context)
 
@@ -42,13 +42,12 @@ def men_products(request):
     }
     return render(request, "store/men_products.html", context)
 
-# def category_list():
-#     return {
-#         "category_urls": [
-#             {"name": category.name, "url": category.get_absolute_url()}
-#             for category in Category.objects.all()
-#         ]
-#     }
+
+def category_list(request, category_name):
+    category = Category.objects.filter(gender='Woman')
+    woman_category = get_object_or_404(category, category_name=category_name)
+    context = {'products': Product.objects.filter(category_name=woman_category)}
+    return render(request, "store/products_by_categorys.html", context)
 
 
 def one_product(request, pk):
@@ -71,7 +70,6 @@ def one_product(request, pk):
 
 
 def show_cart(request):
-
     if request.method == 'POST':
         if request.POST.get('submit') == 'Update':
             cart.update_item(request)
@@ -81,9 +79,9 @@ def show_cart(request):
     cart_items = cart.get_all_cart_items(request)
     cart_subtotal = cart.subtotal(request)
     return render(request, 'store/cart.html', {
-                                            'cart_items': cart_items,
-                                            'cart_subtotal': cart_subtotal,
-                                            })
+        'cart_items': cart_items,
+        'cart_subtotal': cart_subtotal,
+    })
 
 
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
@@ -108,3 +106,4 @@ def api_root(request, format=None):
         'users': reverse('user-list', request=request, format=format),
         'snippets': reverse('snippet-list', request=request, format=format)
     })
+
