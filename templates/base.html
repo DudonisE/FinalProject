@@ -36,7 +36,7 @@
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'women-products-view' %}">All</a></li>
     {% for category in women_category %}
-    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+    <li><a class="dropdown-item" href="{% url 'categorys' category.category_name %}">{{category.category_name}}</a></li>
   {% endfor %}
   </ul>
             </div>
@@ -45,7 +45,7 @@
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="/men_products">All</a></li>
     {% for category in men_category %}
-    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+    <li><a class="dropdown-item" href="{% url 'categorys' %}">{{category.category_name}}</a></li>
     {% endfor %}
   </ul>
 </div>
