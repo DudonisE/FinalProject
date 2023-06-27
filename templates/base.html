@@ -12,9 +12,12 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="False" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
+        </div>
   <div class="collapse navbar-collapse" id="navbarText">
+      </div>
     <ul class="navbar-nav mr-auto">
       {% if user.is_authenticated %}
+        </ul>
       <div class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="profile" role="button" aria-expanded="false">Welcome, {{user.username}}</a>
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
@@ -34,19 +37,19 @@
         <div class="nav-item dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Women</a>
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
+      
     <li><a class="dropdown-item" href="{% url 'women-products-view' %}">All</a></li>
     {% for category in women_category %}
     <li><a class="dropdown-item" href="woman/{{category.category_name}}">{{category.category_name}}</a></li>
   {% endfor %}
+
   </ul>
-            </div>
+</div>
       <div class="dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Men</a>
   <ul class="dropdown-menu">
-    <li><a class="dropdown-item" href="/men_products">All</a></li>
-    {% for category in men_category %}
-    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
-    {% endfor %}
+    <li><a class="dropdown-item" href="{% url 'product_by_gender' gender='Man' %}">All</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='SHIRT' %}">Shirts</a></li>
   </ul>
 </div>      <div class="dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Temporary</a>

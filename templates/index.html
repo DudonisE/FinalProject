@@ -10,52 +10,17 @@
             </div>
         </div>
 		</div>
-	</section>
-	<style>
-		.banner2{
-			background-color: #fff;
-			margin-right: 1rem;
-			margin-left: 1rem;
-			margin-bottom: 0 !important;
-			padding-bottom: 0 !important;
-		}
-
-		.ban_img{
-			height: 680px;
-			width: 100%;
-		}
-		.ban5_img{
-			height: 580px;
-			width: 100%;
-		}
-
-		.btn-light {
-			color: #000;
-			background-color: #fff;
-			border-color: #fff;
-			border-radius: 20px;
-		}
-		.wrap-btn-slide1 a:hover{
-			background-color: whitesmoke;
-			color: #000 !important;
-			opacity: 0.7;
-
-		}
-	</style>
-
-		<div class="container">
-			<div class="row">
-				<div class="image">
-						<a href="{% url 'women-products-view' %}">
-						<img src="/media/Slide1.jpg" alt="IMG-BANNER" class="ban_img" height="850px">
+			<div class="clearfix">
+  				<div class="img-container">
+						<a href="{% url 'product_by_gender' gender='Woman' %}">
+						<img src="/media/Slide1.jpg" alt="IMG-BANNER" style="width:100%">
+						</a>
+				</div>
+				<div class="img-container">
+						<a href="{% url 'product_by_gender' gender='Man' %}">
+						<img src="/media/Slide1-2.jpg" alt="IMG-BANNER" style="width:100%" >
 						</a>
 						</div>
-				<div class="image">
-						<a href="{% url 'men-products-view' %}">
-						<img src="/media/Slide1-2.jpg" alt="IMG-BANNER" class="ban_img" height="850px">
-						</a>
-						</div>
-					</div>
 				</div>
 
 
