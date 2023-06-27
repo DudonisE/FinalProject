@@ -36,7 +36,7 @@
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'women-products-view' %}">All</a></li>
     {% for category in women_category %}
-    <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
+    <li><a class="dropdown-item" href="woman/{{category.category_name}}">{{category.category_name}}</a></li>
   {% endfor %}
   </ul>
             </div>
@@ -47,6 +47,17 @@
     {% for category in men_category %}
     <li><a class="dropdown-item" href="#">{{category.category_name}}</a></li>
     {% endfor %}
+  </ul>
+</div>      <div class="dropdown">
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Temporary</a>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+    <li><a class="dropdown-item" href="{% url 'new-order' %}">New order</a></li>
+    <li><a class="dropdown-item" href="{% url 'services' %}">Services</a></li>
+    <li><a class="dropdown-item" href="{% url 'new-service' %}">New service</a></li>
+
+
+
   </ul>
 </div>
         <form class="d-flex" action="{% url 'search-view' %}" method="GET" value="{{request.GET.name}}">

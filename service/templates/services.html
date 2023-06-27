@@ -6,11 +6,10 @@
         {% load crispy_forms_tags %}
         {% csrf_token %}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Active orders</legend>
-            {% if orders %}
-        {% for order in orders %}
-            <a href={{order.id}}>{{order}}: {{order.service}}</a><br><br>
-
+            <legend class="border-bottom mb-4">All possible services:</legend>
+            {% if services %}
+        {% for service in services %}
+            <a href={{service.id}}>{{service.title}} : {{service.price}}€</a><br><br>
 
 
 {% endfor %}

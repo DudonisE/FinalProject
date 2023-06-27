@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="content-section">
+
+               <h1>My order:</h1>
+    <p class="fs-1">.fs-5 text</p>
+        <div>Title: {{order.service}}</div>
+        <div>Status: {{object.status}}</div>
+
+</div>
+            {% if object.user == user %}
+            <div>
+                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'order-update' object.id %}">Edit</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'order-delete' object.id %}">Delete</a>
+            </div>
+            {% endif %}
+{% endblock %}
+
+
+
