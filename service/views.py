@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, get_object_or_404, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
+from django.views.generic.edit import FormMixin
 
 from service.models import Order, Service
+from .forms import OrderReviewForm
 
 
 class MyOrderListView(generic.ListView, LoginRequiredMixin):
@@ -15,9 +17,29 @@ class MyOrderListView(generic.ListView, LoginRequiredMixin):
         return Order.objects.filter(user=self.request.user)
 
 
-class OrderDetailView(LoginRequiredMixin, generic.DetailView):
+class OrderDetailView(FormMixin, generic.DetailView):
     model = Order
     template_name = 'order.html'
+    form_class = OrderReviewForm
+
+    def get_success_url(self):
+        return reverse('book-detail', kwargs={'pk': self.object.id})
+
+    # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    # štai čia nurodome, kad knyga bus būtent ta, po kuria komentuojame, o vartotojas bus tas, kuris yra prisijungęs.
+    def form_valid(self, form):
+        form.instance.order = self.object
+        form.instance.user = self.request.user
+        form.save()
+        return super(OrderDetailView, self).form_valid(form)
 
 
 class OrderCreateView(generic.CreateView, LoginRequiredMixin):
