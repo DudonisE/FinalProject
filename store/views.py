@@ -36,8 +36,6 @@ def products_by_category(request, gender, category_name):
     return render(request, 'store/products_by_categorys.html', {'products': products, 'gender': gender, 'category_name': category_name})
 
 
-
-
 def one_product(request, gender, pk):
     product = Product.objects.get(category_name__gender=gender, id=pk)
     return render(request, 'store/product.html', {'product': product})
