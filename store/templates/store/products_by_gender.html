@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+
 <h1>Products for {{ gender }}</h1>
 
 {% for product in products %}
@@ -11,4 +12,5 @@
     <hr>
   </div>
 {% endfor %}
-{% endblock content %}
+
+{% endblock %}

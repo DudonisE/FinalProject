@@ -41,7 +41,6 @@ def one_product(request, gender, pk):
     return render(request, 'store/product.html', {'product': product})
 
 
-
 def search_feature(request):
     if request.method == 'GET':
         search_query = request.GET.get('q')
