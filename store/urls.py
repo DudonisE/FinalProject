@@ -11,4 +11,5 @@ urlpatterns = [
     path('cart/', views.show_cart, name='show_cart'),
 ]
 
+
 urlpatterns = format_suffix_patterns(urlpatterns)
