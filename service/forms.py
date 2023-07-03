@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from service.models import Order, OrderReview
 
 
-# class ServiceForm(forms.ModelForm):
-#     class Meta:
-#         model = Order
-#         # fields = '__all__'
-#         exclude = ('user',)
+class OrderReviewForm(forms.ModelForm):
+    class Meta:
+        model = OrderReview
+        fields = ('content', 'order', 'user',)
+        widgets = {'order': forms.HiddenInput(), 'user': forms.HiddenInput()}

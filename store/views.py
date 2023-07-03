@@ -16,7 +16,14 @@ from store.serializers import ProductSerializer
 
 
 def index(request):
-    return render(request, 'index.html')
+
+    context = {
+        'women_category': Category.objects.filter(gender='Woman'),
+        'men_category': Category.objects.filter(gender='Men'),
+    }
+    # all_products = Product.objects.all()
+    # return render(request, "index.html", {'all_products': all_products})
+    return render(request, "index.html", context)
 
 
 def products_by_gender(request, gender):
@@ -32,6 +39,7 @@ def products_by_category(request, gender, category_name):
 def one_product(request, gender, pk):
     product = Product.objects.get(category_name__gender=gender, id=pk)
     return render(request, 'store/product.html', {'product': product})
+
 
 
 def search_feature(request):
