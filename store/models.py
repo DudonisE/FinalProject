@@ -60,14 +60,14 @@ class Product(BaseModel):
         return self.name
 
 
-class Cart(models.Model):
+class Cart(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     session_id = models.CharField(max_length=40, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class CartItem(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='product')
+class CartItem(BaseModel):
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='product', null=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -83,7 +83,7 @@ class CartItem(models.Model):
         return self.quantity * self.product.price
 
 
-class Purchase(models.Model):
+class Purchase(BaseModel):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
     name = models.CharField(max_length=191)
@@ -91,6 +91,7 @@ class Purchase(models.Model):
     postal_code = models.IntegerField()
     address = models.CharField(max_length=191)
     date = models.DateTimeField(auto_now_add=True)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2)
     paid = models.BooleanField(default=False)
 
     guest_name = models.CharField(max_length=50, null=True, blank=True)

@@ -9,10 +9,11 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from django.db.models import Q
 
-from store.forms import CartForm
-from store.models import Product, Category, Size
+
+from store.models import Product, Category, Size, Purchase
 from store.permissions import IsOwnerOrReadOnly
 from store.serializers import ProductSerializer
+from .forms import OrderForm
 
 
 def index(request):
@@ -58,7 +59,6 @@ def place_order(request):
         if order_form.is_valid():
             order = order_form.save(commit=False)
             order.cart = cart
-            order.total_price = calculate_total_price(cart)
             order.save()
 
             # Clear the cart or perform any additional actions
