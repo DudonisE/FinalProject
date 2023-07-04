@@ -1,0 +1,16 @@
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Place Order</h1>
+
+<form method="POST" action="{% url 'place_order' %}">
+  {% csrf_token %}
+
+  {{ order_form.as_p }}
+
+  <button type="submit" class="btn btn-primary">Place Order</button>
+</form>
+
+{% endblock %}
