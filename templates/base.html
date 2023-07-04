@@ -36,15 +36,23 @@
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Women</a>
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'product_by_gender' gender='Woman' %}">All</a></li>
-    {% for category in women_category %}
-    <li><a class="dropdown-item" href="woman/{{category.category_name}}">{{category.category_name}}</a></li>
-  {% endfor %}
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='SWEATSHIRT' %}">Sweatshirts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='JACKET' %}">Jackets</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='SHORTS' %}">Shorts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='SKIRT' %}">Skirts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='PANTS' %}">Pants</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='SHIRTS' %}">Shirts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Woman' category_name='DRESS' %}">Dresses</a></li>
   </ul>
 </div>
       <div class="dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Men</a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'product_by_gender' gender='Man' %}">All</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='SHIRT' %}">Shirts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='SWEATSHIRT' %}">Sweatshirts</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='JACKET' %}">Jackets</a></li>
+    <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='PANTS' %}">Pants</a></li>
     <li><a class="dropdown-item" href="{% url 'product_by_category' gender='Man' category_name='SHIRT' %}">Shirts</a></li>
   </ul>
 </div>

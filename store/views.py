@@ -99,7 +99,30 @@ def search_feature(request):
 
     # one_product = get_object_or_404(Product, pk=pk)
     # return render(request, "store/product.html", {'one_product': one_product})
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    user = request.user
 
+    # Check if the user is authenticated or a guest
+    if user.is_authenticated:
+        # If the user is authenticated, check if they have a cart
+        cart, created = Cart.objects.get_or_create(user=user)
+    else:
+        # If the user is a guest, check if they have a session
+        session_id = request.session.session_key
+        cart, created = Cart.objects.get_or_create(session_id=session_id)
+
+    # Check if the product is already in the cart
+    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    # If the product is already in the cart, increase the quantity
+    if not item_created:
+        cart_item.quantity += 1
+        cart_item.save()
+
+    return redirect('cart')  # Redirect to the cart page after adding the product
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 def show_cart(request):
     if request.method == 'POST':

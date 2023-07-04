@@ -60,11 +60,17 @@ class Product(BaseModel):
         return self.name
 
 
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    session_id = models.CharField(max_length=40, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class CartItem(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
-    quantity = models.IntegerField(default=1, null=True)
-    date_added = models.DateTimeField(auto_now_add=True)
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='product')
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return "{}:{}".format(self.product.name, self.pk)
@@ -77,7 +83,9 @@ class CartItem(models.Model):
         return self.quantity * self.product.price
 
 
-class Order(models.Model):
+class Purchase(models.Model):
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    cart = models.OneToOneField(Cart, on_delete=models.CASCADE)
     name = models.CharField(max_length=191)
     email = models.EmailField()
     postal_code = models.IntegerField()
@@ -85,8 +93,19 @@ class Order(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     paid = models.BooleanField(default=False)
 
+    guest_name = models.CharField(max_length=50, null=True, blank=True)
+    guest_email = models.CharField(max_length=150, null=True, blank=True)
+
     def __str__(self):
         return "{}:{}".format(self.pk, self.email)
+
+    def save(self, *args, **kwargs):
+        # Calculate the total price based on cart items
+        cart_items = self.cart.cartitem_set.all()
+        total_price = sum(item.product.price * item.quantity for item in cart_items)
+        self.total_price = total_price
+
+        super().save(*args, **kwargs)
 
     # def total_cost(self):
     #     return sum([ li.cost() for li in self.lineitem_set.all() ] )

@@ -1,18 +1,22 @@
 from django import forms
-from .models import Order
+from .models import Purchase, CartItem
 
-class CartForm(forms.Form):
-    quantity = forms.IntegerField(initial='1')
-    product_id = forms.IntegerField(widget=forms.HiddenInput)
 
-    def __init__(self, request, *args, **kwargs):
-        self.request = request
-        super(CartForm, self).__init__(*args, **kwargs)
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = ['guest_name', 'guest_email']
+
+
+class CartItemForm(forms.ModelForm):
+    class Meta:
+        model = CartItem
+        fields = ['product', 'quantity']
 
 
 class CheckoutForm(forms.ModelForm):
     class Meta:
-        model = Order
+        model = Purchase
         exclude = ('paid',)
 
         widgets = {
