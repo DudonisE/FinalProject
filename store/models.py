@@ -91,7 +91,7 @@ class Purchase(BaseModel):
     postal_code = models.IntegerField()
     address = models.CharField(max_length=191)
     date = models.DateTimeField(auto_now_add=True)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     paid = models.BooleanField(default=False)
 
     guest_name = models.CharField(max_length=50, null=True, blank=True)

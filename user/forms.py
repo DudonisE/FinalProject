@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from user.models import BodyMeasurements, Profile
+from user.models import BodyMeasurements, Profile, ContactUs
 
 
 class RegisterForm(UserCreationForm):
@@ -27,7 +27,7 @@ class BodyMeasurementsForm(forms.ModelForm):
             'shoulder_to_floor': 'Shoulder to floor (I)',
         }
         # fields = '__all__'
-        exclude = ('user','measure_model',)
+        exclude = ('user', 'measure_model',)
         # exclude = ('user', 'last_updated', 'measure_model', )
 
 
@@ -45,8 +45,14 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'last_name', 'email', ]
 
+
 # class PasswordResetForm(UserCreationForm):
 #     class Meta:
 #         model = User
 #         fields = ['email']
 #
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = ContactUs
+        fields = ('full_name', 'email', 'message')
