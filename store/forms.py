@@ -2,7 +2,7 @@ from django import forms
 from .models import Purchase, CartItem
 
 
-class OrderForm(forms.ModelForm):
+class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
         fields = ['guest_name', 'guest_email']

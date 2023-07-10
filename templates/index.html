@@ -11,17 +11,15 @@
         </div>
 		</div>
 			<div class="clearfix">
-  				<div class="img-container">
+  				<div class="img-container" >
 						<a href="{% url 'product_by_gender' gender='Woman' %}">
-						<img src="media/Slide1.jpg" alt="IMG-BANNER" style="width:30%">
+						<img src="media/Slide1.jpg" style="width:45%" class="rounded float-left" alt="Responsive image">
 						</a>
-				</div>
-				<div class="img-container">
 						<a href="{% url 'product_by_gender' gender='Man' %}">
-						<img src="media/Slide1-2.jpg" alt="IMG-BANNER" style="width:30%" >
+						<img src="media/Slide1-2.jpg" alt="IMG-BANNER"  class="rounded float-right" style="width:45%" >
 						</a>
-						</div>
 				</div>
+			</div>
 
 
 {% endblock %}

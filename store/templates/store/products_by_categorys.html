@@ -3,12 +3,34 @@
 
 <h1>Products for Category: {{ category_name }}</h1>
 
-{% for product in products %}
-  <div class="product-item">
-    <h3>{{ product.name }}</h3>
-    <img src="{{ product.image_1.url }}" alt="{{ product.name }}" width="250px" height="250px">
-    <p>Price: ${{ product.price|floatformat:2 }}</p>
+<div class="image-grid">
+    {% for product in products %}
+        <div class="image-item">
+            <img src="{{ product.image_1.url }}" alt="product" class="img-thumbnail">
+            <div class="product-details">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p>Price: ${{ product.price|floatformat:2 }}</p>
+            </div>
+        </div>
+    {% endfor %}
   </div>
-{% endfor %}
+<div class="pagination">
+    {% if products.has_previous %}
+        <a href="?page={{ products.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    {% for num in products.paginator.page_range %}
+        {% if num == products.number %}
+            <span class="current-page">{{ num }}</span>
+        {% else %}
+            <a href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if products.has_next %}
+        <a href="?page={{ products.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
 
 {% endblock %}

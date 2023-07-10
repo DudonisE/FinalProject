@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.urls import reverse_lazy
 from rest_framework import generics
 from django.contrib.auth.models import User
-from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm
+from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm, ContactForm
 from django.contrib.auth.decorators import login_required
 
 from .models import BodyMeasurements
@@ -96,6 +96,17 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
     success_url = reverse_lazy('users-profile')
 
 
+def contact_us(request):
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, f'Your message was succesfully send!')
+            return redirect("/")
+    form = ContactForm()
+    return render(request, "users/contactus.html", {"form": form})
+
+
 class UserList(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -104,3 +115,4 @@ class UserList(generics.ListAPIView):
 class UserDetail(generics.RetrieveAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
