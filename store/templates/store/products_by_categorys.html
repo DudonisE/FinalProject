@@ -6,7 +6,9 @@
 <div class="image-grid">
     {% for product in products %}
         <div class="image-item">
+            <a href="{% url 'product-view' gender=product.category_name.first.gender pk=product.id %}">
             <img src="{{ product.image_1.url }}" alt="product" class="img-thumbnail">
+            </a>
             <div class="product-details">
                 <h3 class="product-name">{{ product.name }}</h3>
                 <p>Price: ${{ product.price|floatformat:2 }}</p>
