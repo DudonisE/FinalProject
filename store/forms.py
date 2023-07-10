@@ -1,5 +1,5 @@
 from django import forms
-from .models import Purchase, CartItem
+from .models import Purchase, CartItem, Size
 
 
 class PurchaseForm(forms.ModelForm):
@@ -22,3 +22,9 @@ class CheckoutForm(forms.ModelForm):
         widgets = {
             'address': forms.Textarea(attrs={'row': 5, 'col': 8}),
         }
+
+
+class SizeForm(forms.ModelForm):
+    class Meta:
+        model = Size
+        fields = '__all__'
