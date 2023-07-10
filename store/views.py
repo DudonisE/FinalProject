@@ -46,7 +46,8 @@ def products_by_category(request, gender, category_name):
 
 def one_product(request, gender, pk):
     product = Product.objects.get(category_name__gender=gender, id=pk)
-    return render(request, 'store/product.html', {'product': product})
+    sizes = product.size.all()
+    return render(request, 'store/product.html', {'product': product, 'sizes': sizes})
 
 
 def search_feature(request):
