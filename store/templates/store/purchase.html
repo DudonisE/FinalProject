@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Purchase Details</h1>
+
+<p>Purchase ID: {{ purchase.pk }}</p>
+<p>Name: {{ purchase.name }}</p>
+<p>Email: {{ purchase.email }}</p>
+<p>Postal Code: {{ purchase.postal_code }}</p>
+<p>Address: {{ purchase.address }}</p>
+<p>Total Price: ${{ purchase.total_price }}</p>
+<p>Paid: {% if purchase.paid %}Yes{% else %}No{% endif %}</p>
+
+{% endblock %}

@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.views import generic
 
 from store import cart
@@ -59,35 +60,30 @@ def search_feature(request):
 
 
 def view_cart(request):
-    cart = get_cart_from_session(request)
-    cart_items = cart.cartitem_set.all()
-    return render(request, 'cart.html', {'cart': cart, 'cart_items': cart_items})
+    cart = Cart.objects.get(user=request.user)
+    cart_items = cart.cart_items.all()
+    total_cost = sum(item.total_cost() for item in cart_items)
+    return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_cost': total_cost})
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, pk=product_id)
-    user = request.user
-
-    # Check if the user is authenticated or a guest
-    if user.is_authenticated:
-        # If the user is authenticated, check if they have a cart
-        cart, created = Cart.objects.get_or_create(user=user)
-    else:
-        # If the user is a guest, check if they have a session
-        session_id = request.session.session_key
-        cart, created = Cart.objects.get_or_create(session_id=session_id)
-
-    # Check if the product is already in the cart
-    cart_item, item_created = CartItem.objects.get_or_create(cart=cart, product=product)
-
-    # If the product is already in the cart, increase the quantity
-    if not item_created:
-        cart_item.quantity += 1
-        cart_item.save()
-
-    return redirect('cart')  # Redirect to the cart page after adding the product
+    if request.method == 'POST':
+        product = Product.objects.get(pk=product_id)
+        size_ids = request.POST.getlist('size_id')
+        sizes = Size.objects.filter(pk__in=size_ids)
+        cart, created = Cart.objects.get_or_create(user=request.user)
+        quantity = int(request.POST.get('quantity', 1))
+        for size in sizes:
+            cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product, size=size)
+            if created:
+                cart_item.quantity = quantity
+            else:
+                cart_item.quantity += quantity
+            cart_item.save()
+        return redirect('view_cart')
+    return redirect('view_cart')
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -98,16 +94,43 @@ def remove_from_cart(request, item_id):
 
 
 def update_cart_item(request, item_id):
-    cart_item = CartItem.objects.get(id=item_id)
     if request.method == 'POST':
-        form = CartItemForm(request.POST, instance=cart_item)
-        if form.is_valid():
-            form.save()
-            return redirect('view_cart')
-    else:
-        form = CartItemForm(instance=cart_item)
-    return render(request, 'update_cart_item.html', {'form': form, 'cart_item': cart_item})
+        cart_item = CartItem.objects.get(id=item_id)
+        quantity = int(request.POST.get('quantity', 0))
+        if quantity > 0:
+            cart_item.quantity = quantity
+            cart_item.save()
+        else:
+            cart_item.delete()
+    return redirect('view_cart')
 
+
+
+@login_required
+def checkout(request):
+    cart = Cart.objects.get(user=request.user)
+    cart_items = cart.cart_items.all()
+    total_cost = sum(item.total_cost() for item in cart_items)
+
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        postal_code = request.POST['postal_code']
+        address = request.POST['address']
+
+        purchase = Purchase.objects.create(user=request.user, cart=cart, name=name, email=email,
+                                           postal_code=postal_code, address=address, total_price=total_cost)
+        cart_items.delete()
+        cart.delete()
+        return redirect('purchase', purchase_id=purchase.id)
+
+    return render(request, 'store/checkout.html', {'cart_items': cart_items, 'total_cost': total_cost})
+
+
+def purchase(request, purchase_id):
+    purchase = Purchase.objects.get(id=purchase_id)
+
+    return render(request, 'store/purchase.html', {'purchase': purchase})
 
 def place_order(request):
     cart = get_cart_from_session(request)
