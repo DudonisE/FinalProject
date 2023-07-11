@@ -9,7 +9,19 @@ body {
   padding: 10px;
   border-radius: 5px;
 }
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 
+main {
+  flex: 1;
+}
+
+footer {
+  margin-top: auto;
+}
 .button {
   background-color: #0080ff;
   color: #fff;
@@ -21,6 +33,13 @@ body {
 
 .button:hover {
   background-color: #0059b3;
+}
+.transparent-button {
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
 }
 
 .link {
@@ -48,6 +67,9 @@ body {
 .navbar {
   background-color: #f8f8f8;
   padding: 10px;
+}
+#special-link {
+  float: left;
 }
 
 .navbar-nav {
@@ -152,7 +174,7 @@ h1 {
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 80%;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
@@ -164,10 +186,30 @@ h1 {
 }
 
 .pagination {
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.pagination a {
+  display: inline-block;
+  padding: 8px 12px;
+  margin: 0 4px;
+  text-decoration: none;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 4px;
+  background-color: #f5f5f5;
+}
+
+.pagination .prev,
+.pagination .next {
+  background-color: #f5f5f5;
+}
+
+.pagination .current {
+  background-color: #000;
+  color: #fff;
 }
 
 .pagination-list {
@@ -192,6 +234,14 @@ h1 {
 .current-page {
   font-weight: bold;
   color: #000;
+}
+.product-link {
+  color: black;
+  text-decoration: none;
+}
+
+.product-link:hover {
+  color: #333; /* You can customize the hover color if desired */
 }
 #product-carousel {
   width: 100%;

@@ -26,9 +26,7 @@ class BodyMeasurementsForm(forms.ModelForm):
             'shoulder_to_waist': 'Shoulder to waist (H)',
             'shoulder_to_floor': 'Shoulder to floor (I)',
         }
-        # fields = '__all__'
         exclude = ('user', 'measure_model',)
-        # exclude = ('user', 'last_updated', 'measure_model', )
 
 
 class ProfileUpdateForm(forms.ModelForm):
@@ -46,13 +44,17 @@ class UpdateUserForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', ]
 
 
+#TODO
 # class PasswordResetForm(UserCreationForm):
 #     class Meta:
 #         model = User
 #         fields = ['email']
-#
+
 
 class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields = ('full_name', 'email', 'message')
+
+
+

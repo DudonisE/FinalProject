@@ -1,11 +1,13 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from store.models import Product
+
+"""
+Serializing and deserializing the users instances into representations such as json.
+"""
 
 
 class UserSerializer(serializers.ModelSerializer):
-    snippets = serializers.PrimaryKeyRelatedField(many=True, queryset=Product.objects.all())
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'product']
+        fields = ['id', 'username', ]

@@ -1,6 +1,4 @@
-from django.views import generic
 
-from store import cart
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics
 from rest_framework import permissions
@@ -38,6 +36,9 @@ def products_by_gender(request, gender):
 
 def products_by_category(request, gender, category_name):
     products = Product.objects.filter(category_name__gender=gender, category_name__category_name=category_name)
+    """
+    Get the pages for products with Paginator
+    """
     paginator = Paginator(products, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -87,7 +88,7 @@ def add_to_cart(request, product_id):
         cart_item.quantity += 1
         cart_item.save()
 
-    return redirect('cart')  # Redirect to the cart page after adding the product
+    return redirect('add_to_cart')  # Redirect to the cart page after adding the product
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 

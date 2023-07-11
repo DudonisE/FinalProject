@@ -1,4 +1,4 @@
-asgiref==3.6.0
+asgiref==3.7.2
 bootstrap4==0.1.0
 cart==1.2.2
 certifi==2022.12.7
@@ -8,7 +8,7 @@ Django==4.2
 django-appconf==1.0.5
 django-crispy-forms==2.0
 django-measurement==3.2.4
-django-stubs==1.16.0
+django-stubs==4.2.3
 django-stubs-ext==0.8.0
 djangorestframework==3.14.0
 idna==3.4

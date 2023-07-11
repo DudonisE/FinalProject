@@ -1,4 +1,5 @@
 from django.urls import path
+from rest_framework.urlpatterns import format_suffix_patterns
 import user.views as views
 
 
@@ -12,3 +13,5 @@ urlpatterns = [
     path('users/<int:pk>/', views.UserDetail.as_view()),
     path('contactus/', views.contact_us, name='contact_us')
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
