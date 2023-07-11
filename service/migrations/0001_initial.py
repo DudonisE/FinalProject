@@ -30,7 +30,7 @@ class Migration(migrations.Migration):
                     ),
                 ),
 
-                ("service", models.CharField(max_length=200, verbose_name="Service")),
+                ("title", models.CharField(max_length=200, verbose_name="Service")),
 
                 (
                     "price",
