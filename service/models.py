@@ -13,7 +13,7 @@ SERVICE_CHOICES = [
 
 
 class Service(models.Model):
-    service = models.CharField(verbose_name='Service', max_length=200, blank=False)
+    title = models.CharField(verbose_name='Service', max_length=200, blank=False)
     price = models.FloatField(verbose_name='Price', blank=False, null=True, validators=[validate_positive])
 
     def __str__(self):

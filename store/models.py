@@ -67,8 +67,9 @@ class Cart(BaseModel):
 
 
 class CartItem(BaseModel):
-    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='product', null=True)
+    cart = models.ForeignKey('Cart', on_delete=models.CASCADE, related_name='cart_items', null=True)
     product = models.ForeignKey('Product', on_delete=models.CASCADE)
+    size = models.ForeignKey('Size', on_delete=models.CASCADE, null=True)
     quantity = models.PositiveIntegerField(default=1)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -76,7 +77,7 @@ class CartItem(BaseModel):
         return "{}:{}".format(self.product.name, self.pk)
 
     def update_quantity(self, quantity):
-        self.quantity = self.quantity + quantity
+        self.quantity += quantity
         self.save()
 
     def total_cost(self):
@@ -100,13 +101,13 @@ class Purchase(BaseModel):
     def __str__(self):
         return "{}:{}".format(self.pk, self.email)
 
-    def save(self, *args, **kwargs):
-        # Calculate the total price based on cart items
-        cart_items = self.cart.cartitem_set.all()
-        total_price = sum(item.product.price * item.quantity for item in cart_items)
-        self.total_price = total_price
-
-        super().save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     # Calculate the total price based on cart items
+    #     cart_items = self.cart.cartitem_set.all()
+    #     total_price = sum(item.product.price * item.quantity for item in cart_items)
+    #     self.total_price = total_price
+    #
+    #     super().save(*args, **kwargs)
 
     # def total_cost(self):
     #     return sum([ li.cost() for li in self.lineitem_set.all() ] )
