@@ -9,9 +9,12 @@ from rest_framework import generics
 from django.contrib.auth.models import User
 from .forms import RegisterForm, ProfileUpdateForm, UpdateUserForm, BodyMeasurementsForm, ContactForm
 from django.contrib.auth.decorators import login_required
-
 from .models import BodyMeasurements
 from .serializers import UserSerializer
+
+"""
+User views are for registering new users, login/logout, to update users profile and contact shop owner.
+"""
 
 
 def register(request):
@@ -20,7 +23,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! You are now able to log in')
+            messages.success(request, f'Your account has been created! You are now able to log in!')
             return redirect("/")
     form = RegisterForm()
     return render(request, "users/register.html", {"form": form})
@@ -101,10 +104,15 @@ def contact_us(request):
         form = ContactForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request, f'Your message was succesfully send!')
+            messages.success(request, f'Your message was successfully send!')
             return redirect("/")
     form = ContactForm()
     return render(request, "users/contactus.html", {"form": form})
+
+
+"""
+REST framework code to see user list or only one user by entering ID.
+"""
 
 
 class UserList(generics.ListAPIView):

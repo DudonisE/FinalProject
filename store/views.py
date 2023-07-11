@@ -1,7 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.views import generic
-
-from store import cart
 from django.shortcuts import render, get_object_or_404, redirect
 from rest_framework import generics
 from rest_framework import permissions
@@ -9,7 +6,6 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
 from django.db.models import Q
-
 from store.cart import get_cart_from_session
 from store.forms import PurchaseForm, CartItemForm
 from store.models import Product, Category, Size, Cart, CartItem, Purchase
@@ -39,6 +35,9 @@ def products_by_gender(request, gender):
 
 def products_by_category(request, gender, category_name):
     products = Product.objects.filter(category_name__gender=gender, category_name__category_name=category_name)
+    """
+    Get the pages for products with Paginator
+    """
     paginator = Paginator(products, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

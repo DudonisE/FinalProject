@@ -4,6 +4,11 @@ from django.dispatch import receiver
 from .models import Profile
 from user.models import BodyMeasurements
 
+"""
+Function create_profile is a signal handler that gets triggered after a User object is saved. 
+It creates a related Profile and BodyMeasurements object associated with the user instance that was just created.
+"""
+
 
 @receiver(post_save, sender=User)
 def create_profile(sender, instance, created, **kwargs):
