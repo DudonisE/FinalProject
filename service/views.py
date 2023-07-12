@@ -17,7 +17,11 @@ class MyOrderListView(generic.ListView, LoginRequiredMixin):
     # paginate_by = 10
 
     def get_queryset(self):
-        return Order.objects.filter(user=self.request.user)
+        """sita pridejau tada rodo superuser visus orderius, bet neleidzia jam ju per puslapi update arba istrinti."""
+        if self.request.user.is_superuser:
+            return Order.objects.all()
+        else:
+            return Order.objects.filter(user=self.request.user)
 
 
 class OrderDetailView(FormMixin, generic.DetailView):
@@ -47,7 +51,6 @@ class OrderDetailView(FormMixin, generic.DetailView):
 
 class OrderCreateView(generic.CreateView, LoginRequiredMixin):
     model = Order
-    # fields = '__all__'
     fields = ['service', 'quantity']
     success_url = '/orders/'
     template_name = 'order_creation_form.html'
@@ -55,6 +58,12 @@ class OrderCreateView(generic.CreateView, LoginRequiredMixin):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        """sita pridejau kad leistu kartu su kainomis issiimti services."""
+        context = super().get_context_data(**kwargs)
+        context['services'] = Service.objects.all()
+        return context
 
 
 class OrderUpdateView(generic.UpdateView, LoginRequiredMixin):
