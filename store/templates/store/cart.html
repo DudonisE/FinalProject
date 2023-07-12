@@ -2,28 +2,51 @@
 
 {% block content %}
 
+{% load crispy_forms_tags %}
 
   <h1>Your Cart</h1>
-<ul>
-  {% for cart_item in cart_items %}
-    <li>
-      {{ cart_item.product.name }} - Size: {{ cart_item.size }} - Quantity: {{ cart_item.quantity }}
-       <form method="POST" action="{% url 'update_cart_item' item_id=cart_item.id %}">
-        {% csrf_token %}
-        <input type="number" name="quantity" min="1" value="{{ cart_item.quantity }}">
-        <button type="submit">Update</button>
-      </form>
-      <form method="POST" action="{% url 'remove_from_cart' item_id=cart_item.id %}">
-        {% csrf_token %}
-        <button type="submit">Remove</button>
-      </form>
-    </li>
-  {% empty %}
-    <li>Your cart is empty</li>
-  {% endfor %}
-</ul>
-<p>Total Cost: {{ total_cost }}</p>
-<a href="{% url 'checkout' %}">Proceed to Checkout</a>
+<table>
+  <thead>
+    <tr>
+      <th>Product</th>
+
+      <th>Size</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for cart_item in cart_items %}
+      <tr>
+        <td>{{ cart_item.product.name }} <img src="{{ cart_item.product.image_1.url }}" alt="product" class="img-thumbnail" style="width: 100px; height: auto;"></td>
+        <td>{{ cart_item.size }}</td>
+        <td>
+          <form method="POST" action="{% url 'update_cart_item' item_id=cart_item.id %}">
+            {% csrf_token %}
+            <input type="number" name="quantity" min="1" value="{{ cart_item.quantity }}">
+            <button type="submit" class="btn btn-success">Update</button>
+          </form>
+        </td>
+        <td>
+          <form method="POST" action="{% url 'remove_from_cart' item_id=cart_item.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove</button>
+          </form>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="4">Your cart is empty</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+    <div>
+      <p style="float: right;">Total: {{ total_cost }}</p>
+    </div>
+<a href="{% url 'checkout' %}">
+  <button type="button" class="btn btn-light btn-lg btn-block" style="float: right;">Proceed to Checkout</button>
+</a>
 
 
 {% endblock %}

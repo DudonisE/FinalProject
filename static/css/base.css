@@ -243,7 +243,10 @@ h1 {
 .product-link:hover {
   color: #333; /* You can customize the hover color if desired */
 }
-#product-carousel {
+.product-carousel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   max-width: 600px; /* Adjust the max-width to fit your desired width */
   margin: 0 auto;
@@ -253,6 +256,8 @@ h1 {
 .carousel-item img {
   width: 100%;
   height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /* Carousel indicators */

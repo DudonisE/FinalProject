@@ -24,6 +24,14 @@ SIZE_CHOICES = [
     ('XXL', 'XXL'),
 ]
 
+RATING_CHOICES = [
+    (1, '1 Star'),
+    (2, '2 Stars'),
+    (3, '3 Stars'),
+    (4, '4 Stars'),
+    (5, '5 Stars'),
+]
+
 
 class Size(models.Model):
     size = models.CharField(max_length=200, choices=SIZE_CHOICES)
@@ -90,7 +98,7 @@ class Purchase(BaseModel):
     name = models.CharField(max_length=191)
     email = models.EmailField()
     postal_code = models.IntegerField()
-    address = models.CharField(max_length=191)
+    address = models.CharField(max_length=100)
     date = models.DateTimeField(auto_now_add=True)
     total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True)
     paid = models.BooleanField(default=False)
@@ -101,13 +109,10 @@ class Purchase(BaseModel):
     def __str__(self):
         return "{}:{}".format(self.pk, self.email)
 
-    # def save(self, *args, **kwargs):
-    #     # Calculate the total price based on cart items
-    #     cart_items = self.cart.cartitem_set.all()
-    #     total_price = sum(item.product.price * item.quantity for item in cart_items)
-    #     self.total_price = total_price
-    #
-    #     super().save(*args, **kwargs)
 
-    # def total_cost(self):
-    #     return sum([ li.cost() for li in self.lineitem_set.all() ] )
+class ProductReview(models.Model):
+    product = models.ForeignKey(to="Product", on_delete=models.CASCADE, related_name='reviews')
+    user = models.ForeignKey(to=User, verbose_name="User", on_delete=models.CASCADE, null=True, blank=True)
+    date_created = models.DateTimeField(verbose_name="Date", auto_now_add=True)
+    rating = models.IntegerField(choices=RATING_CHOICES, null=True)
+    content = models.TextField(verbose_name='Text', max_length=5000)

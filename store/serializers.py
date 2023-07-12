@@ -17,4 +17,3 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         owner = serializers.ReadOnlyField(source='owner.username')
         fields = ['owner', 'name', 'color', 'description', 'price', ]
-

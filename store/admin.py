@@ -1,6 +1,5 @@
 from django.contrib import admin
-
-from store.models import Size, Category, Product, Purchase, CartItem, Cart
+from store.models import *
 
 admin.site.register(Size)
 admin.site.register(Category)

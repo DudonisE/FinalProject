@@ -4,7 +4,6 @@
 <div class="content-section">
 
                <h1>My order:</h1>
-    <p class="fs-1">.fs-5 text</p>
         <div>Title: {{order.service}}</div>
         <div>Status: {{object.status}}</div>
 
@@ -19,11 +18,11 @@
             {% if user.is_authenticated %}
   <div class="fieldWrapper">
     <hr><br/>
-    <h4>Palikite atsiliepimą:</h4>
+    <h4>Leave review here:</h4>
     <form action="" method="post">
       {% csrf_token %}
-      {{ form.content }}</br>
-      <input type="submit" value="Išsaugoti">
+      {{ form.content }}
+      <input type="submit" class="btn btn-success" value="Submit">
     </form>
   </div>
   {% endif %}

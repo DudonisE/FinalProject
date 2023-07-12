@@ -44,7 +44,7 @@ class UpdateUserForm(forms.ModelForm):
         fields = ['username', 'first_name', 'last_name', 'email', ]
 
 
-#TODO
+# TODO
 # class PasswordResetForm(UserCreationForm):
 #     class Meta:
 #         model = User
@@ -55,6 +55,3 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = ContactUs
         fields = ('full_name', 'email', 'message')
-
-
-

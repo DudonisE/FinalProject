@@ -1,7 +1,5 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-from service.models import Order, OrderReview
+from service.models import OrderReview
 
 
 class OrderReviewForm(forms.ModelForm):

@@ -4,12 +4,17 @@
 
 {% for product in products %}
 <div class="col-lg-4">
-    <img src="{{ product.image_1.url }}" hspace='40' vspace='40' width='250px' height='250px' alt=""/>
-    <div class="box-element product">
-        <li>
-            {{ product.name }}, {{ product.price }}
-        </li>
+    <div class="image-item">
+            <a href="{% url 'product-view' gender=product.category_name.first.gender pk=product.id %}">
+            <img src="{{ product.image_1.url }}" alt="product" class="img-thumbnail">
+            </a>
+            <div class="product-details">
+                <a href="{% url 'product-view' gender=product.category_name.first.gender pk=product.id %}" class="product-link">
+                <h3 class="product-name" >{{ product.name }}</h3>
+                </a>
+                <p>Price: ${{ product.price|floatformat:2 }}</p>
+            </div>
+        </div>
         {% endfor %}
     </div>
-</div>
 {% endblock %}

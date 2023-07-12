@@ -20,6 +20,7 @@
   <ul aria-labelledby="navbarDropdown" class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'view_cart' %}">My cart</a></li>
     <li><a  class="dropdown-item" href="{% url 'users-profile'%}">My profile</a></li>
+      <li><a class="dropdown-item" href="{% url 'orders' %}">My orders</a></li>
     <li><a class=dropdown-item" href="{% url 'logout' %}">Logout</a></li>
   </ul>
   </div>
@@ -57,7 +58,7 @@
   </ul>
 </div>
         <div class="dropdown">
-  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Temporary</a>
+  <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sewing Service</a>
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
     <li><a class="dropdown-item" href="{% url 'new-order' %}">New order</a></li>
@@ -66,12 +67,13 @@
   </ul>
 </div>
 
-        <form class="d-flex" action="{% url 'search-view' %}" method="GET" value="{{request.GET.name}}">
-                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit" >Search</button>
+<div class="container-fluid">
+        <form class="d-flex" action="{% url 'search-view' %}" method="GET" value="{{request.GET.name}}" >
+                <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search" >
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
- </nav>
-
+</div>
+</nav>
     {% include 'includes/messages.html' %}
 
 

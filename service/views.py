@@ -1,10 +1,13 @@
-from django.shortcuts import render, reverse, get_object_or_404, reverse
+from django.shortcuts import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views import generic
 from django.views.generic.edit import FormMixin
-
 from service.models import Order, Service
 from .forms import OrderReviewForm
+
+"""
+Views for service orders.
+"""
 
 
 class MyOrderListView(generic.ListView, LoginRequiredMixin):
@@ -128,5 +131,3 @@ class ServiceDeleteView(generic.DeleteView, LoginRequiredMixin, UserPassesTestMi
     def test_func(self):
         order = self.get_object()
         return self.request.user == order.user
-
-
