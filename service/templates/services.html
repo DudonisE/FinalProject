@@ -1,24 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="content-section">
-    <form method="POST">
-        {% load crispy_forms_tags %}
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">All possible services:</legend>
-            {% if services %}
+  <legend class="border-bottom mb-4">Services to order:</legend>
+<table>
+  <thead>
+    <tr>
+        <th>Service</th>
+        <th>Price</th>
+    </tr>
+  </thead>
+  <tbody>
         {% for service in services %}
-            <a href={{service.id}}>{{service.title}} : {{service.price}}€</a><br><br>
-
-
-{% endfor %}
-{% endif %}
-            {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-outline-info" type="submit">Save</button>
-        </div>
-    </form>
-</div>
+        <tr>
+            <td>{{service.title}}</td>
+            <td>{{service.price}}</td>
+            {% if user.is_authenticated and user.is_superuser %}
+           <td>
+                <form method="post" action="{% url 'service-update' service.id %}">
+                    {% csrf_token %}
+                     {{ form.as_p }}
+                 <button class="btn btn-success" type="submit">Update</button>
+        </form>
+        </td>
+        <td>
+          <form method="POST" action="{% url 'service-delete' service.id %}">
+            {{ form.as_p }}
+             {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove</button>
+          </form>
+        </td>
+            {% endif %}
+            </tr>
+    {% endfor %}
+      <tr>
+      </tr>
+  </tbody>
+</table>
 {% endblock %}

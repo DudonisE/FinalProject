@@ -89,6 +89,10 @@ footer {
   color: #333;
   padding: 5px;
 }
+.product-name:focus,
+.product-name:active {
+  outline: none;
+}
 
 .dropdown {
   position: relative;

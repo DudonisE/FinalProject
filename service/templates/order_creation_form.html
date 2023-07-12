@@ -3,14 +3,22 @@
 
 <div class="content-section">
     <form method="POST">
-        {% load crispy_forms_tags %}
         {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Place new order</legend>
-            {{ form|crispy }}
-        </fieldset>
+        <legend class="border-bottom mb-4">Place new order</legend>
         <div class="form-group">
-            <button class="btn btn-success" type="submit">Save</button>
+    <label for="service">Service</label>
+    <select class="form-control" id="service" name="service">
+        {% for service in services %}
+            <option value="{{ service.id }}">{{ service.title }} : {{ service.price }}€</option>
+        {% endfor %}
+    </select>
+</div>
+        <div class="form-group">
+            <label for="quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Order</button>
         </div>
     </form>
 </div>

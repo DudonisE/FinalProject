@@ -1,25 +1,54 @@
 {% extends "base.html" %}
 {% block content %}
-
-<div class="content-section">
-    <form method="POST">
-        {% load crispy_forms_tags %}
-        {% csrf_token %}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Active orders</legend>
-            {% if orders %}
+{% load crispy_forms_tags %}
+  <legend class="border-bottom mb-4">Active orders</legend>
+<table>
+  <thead>
+    <tr>
+        <th>Date Created</th>
+        <th>User</th>
+        <th>Order</th>
+        <th>Quantity</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+  <tbody>
         {% for order in orders %}
-            <a href={{order.id}}>{{order}}: {{order.service}}</a><br><br>
+        {% if order.user == request.user or request.user.is_superuser %}
+        <tr>
+            <td>{{order.date}}</td>
+            <td>{{order.user}}</td>
+            <td>{{order.service}}</td>
+            <td>{{order.quantity}}</td>
+            <td>{{order.status}}</td>
+            {% if order.user == request.user %}
+           <td>
+                <form method="post" action="{% url 'order-update' order.id %}">
+                    {% csrf_token %}
+                     {{ form.as_p }}
+    <button class="btn btn-success" type="submit">Update</button>
+</form>
+        </td>
 
-
-
-{% endfor %}
-{% endif %}
+        <td>
+          <form method="POST" action="{% url 'order-delete' order.id %}">
             {{ form|crispy }}
-        </fieldset>
-        <div class="form-group">
-            <button class="btn btn-success" type="submit">Save</button>
-        </div>
-    </form>
-</div>
+             {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Remove</button>
+          </form>
+        </td>
+            {% endif %}
+            </tr>
+        {% endif %}
+    {% empty %}
+      <tr>
+        <td colspan="4">Your cart is empty</td>
+      </tr>
+    {% endfor %}
+      <tr>
+      </tr>
+  </tbody>
+</table>
+
+
 {% endblock %}

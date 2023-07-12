@@ -60,10 +60,12 @@
         <div class="dropdown">
   <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Sewing Service</a>
   <ul class="dropdown-menu">
+      {% if request.user.is_superuser %}
     <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
-    <li><a class="dropdown-item" href="{% url 'new-order' %}">New order</a></li>
-    <li><a class="dropdown-item" href="{% url 'services' %}">Services</a></li>
-    <li><a class="dropdown-item" href="{% url 'new-service' %}">New service</a></li>
+      <li><a class="dropdown-item" href="{% url 'new-service' %}">New service</a></li>
+      {% endif %}
+      <li><a class="dropdown-item" href="{% url 'new-order' %}">New order</a></li>
+      <li><a class="dropdown-item" href="{% url 'services' %}">Services</a></li>
   </ul>
 </div>
 
