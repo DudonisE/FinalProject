@@ -1,32 +1,34 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from django.db.models import Q
+from django.db.models import Q, Avg
+
 from store.cart import get_cart_from_session
-from store.forms import PurchaseForm, CartItemForm
-from store.models import Product, Category, Size, Cart, CartItem, Purchase
+from store.forms import CheckoutForm, PurchaseForm, ProductReviewForm
+from store.models import Product, Category, Size, Cart, CartItem, Purchase, ProductReview
 from store.permissions import IsOwnerOrReadOnly
 from store.serializers import ProductSerializer
 from django.core.paginator import Paginator
 
+"""
+Views for products display and adding to cart.
+"""
+
 
 def index(request):
-
     context = {
         'women_category': Category.objects.filter(gender='Woman'),
         'men_category': Category.objects.filter(gender='Men'),
     }
-    # all_products = Product.objects.all()
-    # return render(request, "index.html", {'all_products': all_products})
     return render(request, "index.html", context)
 
 
 def products_by_gender(request, gender):
     products = Product.objects.filter(category_name__gender=gender)
+    """
+    Get the pages for products with Paginator
+    """
     paginator = Paginator(products, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -45,9 +47,35 @@ def products_by_category(request, gender, category_name):
 
 
 def one_product(request, gender, pk):
-    product = Product.objects.get(category_name__gender=gender, id=pk)
+    product = get_object_or_404(Product, category_name__gender=gender, id=pk)
     sizes = product.size.all()
-    return render(request, 'store/product.html', {'product': product, 'sizes': sizes})
+    average_rating = ProductReview.objects.filter(product=product).aggregate(Avg('rating'))['rating__avg']
+    form = ProductReviewForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.product = product
+            review.user = request.user
+            review.save()
+            return redirect('product-view', gender=gender, pk=pk)
+    reviews = ProductReview.objects.filter(product=product)
+    context = {
+        'product': product,
+        'sizes': sizes,
+        'form': form,
+        'average_rating': average_rating,
+        'reviews': reviews,
+    }
+    return render(request, 'store/product.html', context)
+
+
+def delete_review(request, review_id):
+    review = get_object_or_404(ProductReview, id=review_id)
+    if request.user == review.user:  # Only allow the review owner to delete the review
+        product_id = review.product.id
+        gender = review.product.category_name.all().first().gender
+        review.delete()
+        return redirect('product-view', gender=gender, pk=product_id)
 
 
 def search_feature(request):
@@ -104,7 +132,6 @@ def update_cart_item(request, item_id):
     return redirect('view_cart')
 
 
-
 @login_required
 def checkout(request):
     cart = Cart.objects.get(user=request.user)
@@ -122,14 +149,15 @@ def checkout(request):
         cart_items.delete()
         cart.delete()
         return redirect('purchase', purchase_id=purchase.id)
+    form = CheckoutForm()
 
-    return render(request, 'store/checkout.html', {'cart_items': cart_items, 'total_cost': total_cost})
+    return render(request, 'store/checkout.html', {'cart_items': cart_items, 'total_cost': total_cost, 'form': form})
 
 
 def purchase(request, purchase_id):
     purchase = Purchase.objects.get(id=purchase_id)
-
     return render(request, 'store/purchase.html', {'purchase': purchase})
+
 
 def place_order(request):
     cart = get_cart_from_session(request)
@@ -160,6 +188,11 @@ def about_us(request):
     return render(request, "about_us.html")
 
 
+"""
+REST framework code to see product list or only one product by entering ID.
+"""
+
+
 class ProductDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
@@ -174,25 +207,3 @@ class ProductList(generics.ListCreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
-
-
-@api_view(['GET'])
-def api_root(request, format=None):
-    return Response({
-        'users': reverse('user-list', request=request, format=format),
-        'snippets': reverse('snippet-list', request=request, format=format)
-    })
-
-# < form
-# action = "{% url 'product-view' %}"
-# method = "post" >
-# { % csrf_token %}
-# {{form}}
-# < input
-# type = "submit"
-# value = "Add to cart"
-#
-#
-# class ="btn btn-primary" >
-#
-# < / form >

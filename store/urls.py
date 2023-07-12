@@ -4,6 +4,8 @@ from store import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('product/', views.ProductList.as_view()),
+    path('product/<int:pk>/', views.ProductDetail.as_view()),
     path('aboutus/', views.about_us, name='about_us'),
     path('products/<str:gender>/', views.products_by_gender, name='product_by_gender'),
     path('products/<str:gender>/<str:category_name>/', views.products_by_category, name='product_by_category'),
@@ -17,6 +19,7 @@ urlpatterns = [
     path('purchase/<int:purchase_id>/', views.purchase, name='purchase'),
     path('order/', views.place_order, name='create_order'),
     path('order/success/', views.order_success, name='order_success'),
+    path('review/delete/<int:review_id>/', views.delete_review, name='delete_review'),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
