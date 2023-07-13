@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
-from django.db.models import Q, Avg
+from django.db.models import Q, Avg, Max
 
 from store.cart import get_cart_from_session
 from store.forms import CheckoutForm, PurchaseForm, ProductReviewForm
@@ -71,7 +71,7 @@ def one_product(request, gender, pk):
 
 def delete_review(request, review_id):
     review = get_object_or_404(ProductReview, id=review_id)
-    if request.user == review.user:  # Only allow the review owner to delete the review
+    if request.user == review.user:
         product_id = review.product.id
         gender = review.product.category_name.all().first().gender
         review.delete()
@@ -87,7 +87,7 @@ def search_feature(request):
 
 
 def view_cart(request):
-    cart = Cart.objects.get(user=request.user)
+    cart = Cart.objects.filter(user=request.user).latest('created_at')
     cart_items = cart.cart_items.all()
     total_cost = sum(item.total_cost() for item in cart_items)
     return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_cost': total_cost})
@@ -100,7 +100,22 @@ def add_to_cart(request, product_id):
         product = Product.objects.get(pk=product_id)
         size_ids = request.POST.getlist('size_id')
         sizes = Size.objects.filter(pk__in=size_ids)
-        cart, created = Cart.objects.get_or_create(user=request.user)
+        # Get the carts associated with the user
+
+
+        carts = Cart.objects.filter(user=request.user)
+
+        # Select the appropriate cart based on your business logic
+        cart = None
+
+        if carts.exists():
+            # Select a cart based on your business logic, e.g., selecting the latest one
+            cart = carts.latest('created_at')
+
+        if cart is None:
+            # If no carts exist or no cart is selected based on your business logic, create a new one
+            cart = Cart.objects.create(user=request.user)
+
         quantity = int(request.POST.get('quantity', 1))
         for size in sizes:
             cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product, size=size)
@@ -134,54 +149,65 @@ def update_cart_item(request, item_id):
 
 @login_required
 def checkout(request):
-    cart = Cart.objects.get(user=request.user)
+    cart = Cart.objects.filter(user=request.user).latest('created_at')
     cart_items = cart.cart_items.all()
     total_cost = sum(item.total_cost() for item in cart_items)
-
+    form = CheckoutForm()
     if request.method == 'POST':
         name = request.POST['name']
         email = request.POST['email']
         postal_code = request.POST['postal_code']
         address = request.POST['address']
 
-        purchase = Purchase.objects.create(user=request.user, cart=cart, name=name, email=email,
-                                           postal_code=postal_code, address=address, total_price=total_cost)
+        purchase1 = Purchase.objects.create(user=request.user, cart=cart, name=name, email=email,
+                                            postal_code=postal_code, address=address, total_price=total_cost)
         cart_items.delete()
-        cart.delete()
-        return redirect('purchase', purchase_id=purchase.id)
-    form = CheckoutForm()
+        Cart.objects.create(user=request.user)
 
+        return redirect('purchase', purchase_id=purchase1.id)
     return render(request, 'store/checkout.html', {'cart_items': cart_items, 'total_cost': total_cost, 'form': form})
 
 
 def purchase(request, purchase_id):
-    purchase = Purchase.objects.get(id=purchase_id)
-    return render(request, 'store/purchase.html', {'purchase': purchase})
+    purchase = get_object_or_404(Purchase, pk=purchase_id, user=request.user)
+    ordered_items = CartItem.objects.filter(cart=purchase.cart)
+
+    print(ordered_items)  # Add this line to print the ordered_items
+
+    context = {
+        'purchase': purchase,
+        'ordered_items': ordered_items
+    }
+
+    return render(request, 'store/purchase.html', context)
 
 
-def place_order(request):
-    cart = get_cart_from_session(request)
-
-    if request.method == 'POST':
-        order_form = PurchaseForm(request.POST)
-
-        if order_form.is_valid():
-            order = order_form.save(commit=False)
-            order.cart = cart
-            order.save()
-
-            # Clear the cart or perform any additional actions
-
-            return redirect('order_success')
-    else:
-        order_form = PurchaseForm()
-
-    context = {'order_form': order_form, 'cart': cart}
-    return render(request, 'place_order.html', context)
 
 
-def order_success(request):
-    return render(request, 'order_success.html')
+
+# def place_order(request):
+#     cart = get_cart_from_session(request)
+#
+#     if request.method == 'POST':
+#         order_form = PurchaseForm(request.POST)
+#
+#         if order_form.is_valid():
+#             order = order_form.save(commit=False)
+#             order.cart = cart
+#             order.save()
+#
+#             # Clear the cart or perform any additional actions
+#
+#             return redirect('order_success')
+#     else:
+#         order_form = PurchaseForm()
+#
+#     context = {'order_form': order_form, 'cart': cart}
+#     return render(request, 'place_order.html', context)
+#
+#
+# def order_success(request):
+#     return render(request, 'order_success.html')
 
 
 def about_us(request):

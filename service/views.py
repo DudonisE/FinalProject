@@ -76,7 +76,7 @@ class OrderDeleteView(generic.DeleteView, LoginRequiredMixin, UserPassesTestMixi
     model = Order
     success_url = '/orders/'
     template_name = 'order_delete.html'
-    # template_name = 'delete_order.html'
+
 
     def test_func(self):
         order = self.get_object()

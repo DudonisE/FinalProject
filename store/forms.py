@@ -5,7 +5,7 @@ from .models import Purchase, CartItem, Size, ProductReview, RATING_CHOICES
 class PurchaseForm(forms.ModelForm):
     class Meta:
         model = Purchase
-        fields = ['guest_name', 'guest_email']
+        fields = ['name', 'email', 'postal_code', 'address']
 
 
 class CartItemForm(forms.ModelForm):
