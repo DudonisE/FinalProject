@@ -2,7 +2,7 @@ from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import Profile, BodyMeasurements
-from store.models import Cart
+
 
 """
 Function create_profile is a signal handler that gets triggered after a User object is saved. 

@@ -2,10 +2,10 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from rest_framework import generics
 from rest_framework import permissions
-from django.db.models import Q, Avg, Max
+from django.db.models import Q, Avg
 
-from store.cart import get_cart_from_session
-from store.forms import CheckoutForm, PurchaseForm, ProductReviewForm
+
+from store.forms import CheckoutForm, ProductReviewForm
 from store.models import Product, Category, Size, Cart, CartItem, Purchase, ProductReview
 from store.permissions import IsOwnerOrReadOnly
 from store.serializers import ProductSerializer
@@ -43,7 +43,8 @@ def products_by_category(request, gender, category_name):
     paginator = Paginator(products, 4)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'store/products_by_categorys.html', {'products': page_obj, 'gender': gender, 'category_name': category_name})
+    return render(request, 'store/products_by_categorys.html', {'products': page_obj, 'gender': gender,
+                                                                'category_name': category_name})
 
 
 def one_product(request, gender, pk):
@@ -92,28 +93,22 @@ def view_cart(request):
     total_cost = sum(item.total_cost() for item in cart_items)
     return render(request, 'store/cart.html', {'cart_items': cart_items, 'total_cost': total_cost})
 
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 def add_to_cart(request, product_id):
     if request.method == 'POST':
         product = Product.objects.get(pk=product_id)
         size_ids = request.POST.getlist('size_id')
         sizes = Size.objects.filter(pk__in=size_ids)
-        # Get the carts associated with the user
-
 
         carts = Cart.objects.filter(user=request.user)
-
-        # Select the appropriate cart based on your business logic
         cart = None
 
         if carts.exists():
-            # Select a cart based on your business logic, e.g., selecting the latest one
+
             cart = carts.latest('created_at')
 
         if cart is None:
-            # If no carts exist or no cart is selected based on your business logic, create a new one
+
             cart = Cart.objects.create(user=request.user)
 
         quantity = int(request.POST.get('quantity', 1))
@@ -126,7 +121,6 @@ def add_to_cart(request, product_id):
             cart_item.save()
         return redirect('view_cart')
     return redirect('view_cart')
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 def remove_from_cart(request, item_id):
@@ -180,34 +174,6 @@ def purchase(request, purchase_id):
     }
 
     return render(request, 'store/purchase.html', context)
-
-
-
-
-
-# def place_order(request):
-#     cart = get_cart_from_session(request)
-#
-#     if request.method == 'POST':
-#         order_form = PurchaseForm(request.POST)
-#
-#         if order_form.is_valid():
-#             order = order_form.save(commit=False)
-#             order.cart = cart
-#             order.save()
-#
-#             # Clear the cart or perform any additional actions
-#
-#             return redirect('order_success')
-#     else:
-#         order_form = PurchaseForm()
-#
-#     context = {'order_form': order_form, 'cart': cart}
-#     return render(request, 'place_order.html', context)
-#
-#
-# def order_success(request):
-#     return render(request, 'order_success.html')
 
 
 def about_us(request):
