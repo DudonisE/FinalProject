@@ -32,7 +32,7 @@ class OrderDetailView(FormMixin, generic.DetailView):
     def get_success_url(self):
         return reverse('book-detail', kwargs={'pk': self.object.id})
 
-    # standartinis post metodo perrašymas, naudojant FormMixin, galite kopijuoti tiesiai į savo projektą.
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
@@ -41,7 +41,7 @@ class OrderDetailView(FormMixin, generic.DetailView):
         else:
             return self.form_invalid(form)
 
-    # štai čia nurodome, kad knyga bus būtent ta, po kuria komentuojame, o vartotojas bus tas, kuris yra prisijungęs.
+
     def form_valid(self, form):
         form.instance.order = self.object
         form.instance.user = self.request.user
