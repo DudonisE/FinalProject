@@ -37,7 +37,7 @@ ability to sell their own products as well as provide services.
 Clone the project to your local machine;
 
 ```
-git clone https://github.com/ZygimantasB/calories_counter.git
+git clone https://github.com/DudonisE/FinalProject.git
 ```
 
 
